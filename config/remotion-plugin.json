@@ -1,0 +1,25 @@
+{
+  "schema": "umd.optional-plugin.v1",
+  "name": "Remotion",
+  "publisher": "Remotion",
+  "directory_url": "https://chatgpt.com/plugins/remotion",
+  "codex_docs_url": "https://www.remotion.dev/docs/ai/codex-plugin",
+  "skills_docs_url": "https://www.remotion.dev/docs/ai/skills",
+  "invocation_when_installed": "$remotion",
+  "installation": "separate_user_action_not_bundled",
+  "availability": "must_check_at_execution_time",
+  "fallback": "official_agent_skills_plus_local_remotion_cli",
+  "requires_shared_workspace": true,
+  "official_capabilities": [
+    "remotion-create",
+    "remotion-markup",
+    "remotion-studio",
+    "remotion-render",
+    "remotion-maps",
+    "remotion-captions",
+    "remotion-interactivity",
+    "remotion-docs"
+  ],
+  "design_role": "implementation_and_rendering_not_independent_jury",
+  "audited_at": "2026-10-17"
+}

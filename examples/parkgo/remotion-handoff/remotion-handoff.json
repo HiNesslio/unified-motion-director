@@ -1,0 +1,374 @@
+{
+  "schema": "umd.remotion-handoff.v1",
+  "handoff_id": "remotion-fabf30d4d07885ad",
+  "film_id": "parkgo-mobility-15s-concept",
+  "storyboard_sha256": "fabf30d4d07885adfe616e402beecd1c786db5a96dd71cca7ffcc23ce119708a",
+  "storyboard_source": "/mnt/data/unified-motion-director-codex-v1.6/examples/parkgo/storyboard.json",
+  "duration_sec": 15.0,
+  "fps": 30,
+  "aspect_ratios": [
+    "9:16",
+    "16:9"
+  ],
+  "timeline": "shared-timeline.json",
+  "composition_strategy": "One canonical composition per target aspect ratio; re-layout, do not simply crop.",
+  "creative_authority": "unified-motion-director",
+  "execution_owner": "remotion-plugin-if-available-else-codex-remotion",
+  "acceptance_owner": "two-independent-codex-jurors",
+  "claims_and_assets": [
+    {
+      "id": "logo",
+      "type": "approved wordmark + app icon",
+      "status": "needed"
+    },
+    {
+      "id": "real-bus-ui",
+      "type": "authentic product screenshot",
+      "status": "needed"
+    },
+    {
+      "id": "real-eta-ui",
+      "type": "authentic product screenshot",
+      "status": "needed"
+    },
+    {
+      "id": "real-park-ui",
+      "type": "authentic product screenshot",
+      "status": "needed"
+    },
+    {
+      "id": "licensed-bgm",
+      "type": "instrumental music",
+      "status": "needed"
+    }
+  ],
+  "audio": {
+    "voiceover": false,
+    "music": "BGM 尚未提供；需要授權音樂",
+    "license": "Not yet supplied",
+    "timing_status": "illustrative"
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "start_sec": 0,
+      "end_sec": 1.8,
+      "purpose": "Hook — one quiet line that becomes a route",
+      "why_this_scene": "Creates immediate curiosity with one identifiable object rather than an anonymous brand card.",
+      "subject": "Blue moving waypoint dot",
+      "source_status": "concept",
+      "on_screen_text": [],
+      "frame": {
+        "composition": "Large negative space; thin route line enters from lower-left",
+        "focal_point": "moving dot",
+        "safe_area": "Avoid platform controls near top and bottom in vertical format"
+      },
+      "camera": {
+        "type": "locked editorial",
+        "movement": "none"
+      },
+      "action": "The dot draws a single path, then pauses at the first meaningful point.",
+      "motion": {
+        "motivation": "Establish a continuous path through the product",
+        "easing": "soft acceleration, precise arrival",
+        "signature_move": "Line draw led by one dot"
+      },
+      "transition": {
+        "type": "continuity-carrier",
+        "shared_element": "blue-dot",
+        "entry_state": "dot entering frame",
+        "exit_state": "dot at UI anchor",
+        "seam_note": "Dot becomes the map focus point in S02"
+      },
+      "sound": {
+        "cue_label": "Opening soft pulse (illustrative)",
+        "cue_time_sec": 0.3,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "quiet ivory field",
+        "exit": "dot held at centre-right with a line behind it"
+      },
+      "keyframe_notes": [
+        "0.0s — empty spacious field with a tiny blue point",
+        "0.9s — line curves into a purposeful transit route",
+        "1.8s — dot lands at future map focus"
+      ],
+      "technique_refs": [
+        "Motion Playbook: continuity carrier",
+        "Motion Playbook: line reveal"
+      ]
+    },
+    {
+      "id": "S02",
+      "start_sec": 1.8,
+      "end_sec": 4.2,
+      "purpose": "Show real-time bus view",
+      "why_this_scene": "Introduces the first concrete user outcome using actual app imagery once supplied.",
+      "subject": "Actual bus route UI screenshot region (required)",
+      "source_status": "concept",
+      "on_screen_text": [
+        "巴士動態"
+      ],
+      "frame": {
+        "composition": "Real screen crop occupies middle 60%; feature heading outside screen",
+        "focal_point": "blue dot aligned with bus focus marker",
+        "safe_area": "Retain UI text in frame; adjust vertical crop"
+      },
+      "camera": {
+        "type": "controlled push-in",
+        "movement": "single axis push into route detail"
+      },
+      "action": "Route map enters through the dot handoff; bus route details become clear.",
+      "motion": {
+        "motivation": "Move from abstract route into real product interface",
+        "easing": "gentle ease-out, no bounce",
+        "signature_move": "Shared-dot handoff into real UI"
+      },
+      "transition": {
+        "type": "shared-element",
+        "shared_element": "blue-dot",
+        "entry_state": "dot on map focal point",
+        "exit_state": "highlight on route detail",
+        "seam_note": "Keep dot alignment to map waypoint; no UI redesign"
+      },
+      "sound": {
+        "cue_label": "First feature phrase (illustrative)",
+        "cue_time_sec": 2.0,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "route point exactly matches S01 exit",
+        "exit": "route detail highlighted at edge"
+      },
+      "keyframe_notes": [
+        "1.8s — real UI crop replaces conceptual field",
+        "3.0s — route focus settles on authentic map",
+        "4.2s — anchored highlight prepares the ETA handoff"
+      ],
+      "technique_refs": [
+        "Motion Playbook: shared-element handoff",
+        "Motion Playbook: camera push-in"
+      ]
+    },
+    {
+      "id": "S03",
+      "start_sec": 4.2,
+      "end_sec": 6.8,
+      "purpose": "Reveal arrival estimates without fake times",
+      "why_this_scene": "Makes the bus feature personally useful by showing where timing information would appear.",
+      "subject": "Actual ETA component captured from app (required)",
+      "source_status": "concept",
+      "on_screen_text": [
+        "預計到站"
+      ],
+      "frame": {
+        "composition": "Focused card / UI detail with generous surrounding negative space",
+        "focal_point": "ETA region from authentic screenshot",
+        "safe_area": "No invented countdown digits in concept render"
+      },
+      "camera": {
+        "type": "locked close crop",
+        "movement": "none after a short shared-element shift"
+      },
+      "action": "Selected route detail leads visually to its ETA area; interface remains factual.",
+      "motion": {
+        "motivation": "Explain relationship between route and arrival",
+        "easing": "controlled position transition",
+        "signature_move": "Detail-to-detail shared UI focus"
+      },
+      "transition": {
+        "type": "match move",
+        "shared_element": "route-highlight",
+        "entry_state": "focus at route label",
+        "exit_state": "focus line contracts back to dot",
+        "seam_note": "Last highlight resolves to the same dot used throughout"
+      },
+      "sound": {
+        "cue_label": "Small confirmation accent (illustrative)",
+        "cue_time_sec": 5.4,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "route focus from S02",
+        "exit": "single blue dot ready to travel"
+      },
+      "keyframe_notes": [
+        "4.2s — existing route detail still visible",
+        "5.2s — crop lands on app ETA information",
+        "6.8s — highlight reduces to the persistent dot"
+      ],
+      "technique_refs": [
+        "Motion Playbook: UI detail reveal",
+        "Motion Playbook: continuity carrier"
+      ]
+    },
+    {
+      "id": "S04",
+      "start_sec": 6.8,
+      "end_sec": 9.5,
+      "purpose": "Connect bus mobility to parking",
+      "why_this_scene": "Demonstrates two product categories as one integrated mobility story, not an unrelated montage.",
+      "subject": "Waypoint moving from bus map element to parking label",
+      "source_status": "concept",
+      "on_screen_text": [
+        "停車場資訊"
+      ],
+      "frame": {
+        "composition": "Spatial composition with a restrained single route stroke",
+        "focal_point": "dot moving to parking symbol",
+        "safe_area": "Labels only; no invented availability number"
+      },
+      "camera": {
+        "type": "single direction tracking",
+        "movement": "horizontal move, no zoom reversal"
+      },
+      "action": "Blue dot follows a line into a simple parking glyph, and real parking UI takes focus.",
+      "motion": {
+        "motivation": "Make feature transition causal and continuous",
+        "easing": "steady then gentle deceleration",
+        "signature_move": "Graphic bridge and spatial handoff"
+      },
+      "transition": {
+        "type": "continuity-carrier",
+        "shared_element": "blue-dot",
+        "entry_state": "blue point departs ETA highlight",
+        "exit_state": "blue point beside parking symbol",
+        "seam_note": "Dot remains same perceived diameter and follows same travel direction"
+      },
+      "sound": {
+        "cue_label": "Musical phrase change (illustrative)",
+        "cue_time_sec": 7.0,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "dot position follows S03 exit",
+        "exit": "parking anchor highlighted"
+      },
+      "keyframe_notes": [
+        "6.8s — ETA UI retreats behind continuing blue line",
+        "8.0s — line flows across empty canvas without particle effects",
+        "9.5s — parking destination becomes focal"
+      ],
+      "technique_refs": [
+        "Motion Playbook: graphic continuity carrier",
+        "Motion Playbook: restrained camera"
+      ]
+    },
+    {
+      "id": "S05",
+      "start_sec": 9.5,
+      "end_sec": 12.5,
+      "purpose": "Real parking information as second payoff",
+      "why_this_scene": "Proves the app's cross-category utility while preserving authentic, legible product UI.",
+      "subject": "Actual parking availability interface screenshot (required)",
+      "source_status": "concept",
+      "on_screen_text": [
+        "空位，一目了然"
+      ],
+      "frame": {
+        "composition": "Single authentic parking UI detail, headline upper-left",
+        "focal_point": "parking status region, but no fabricated counts",
+        "safe_area": "Check all car-type labels at target vertical crop"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "short contained UI pan only if source geometry permits"
+      },
+      "action": "A parking row/card is revealed by clipped movement, then holds long enough to read.",
+      "motion": {
+        "motivation": "Reveal relevant data without decorative noise",
+        "easing": "clean ease-out",
+        "signature_move": "Masked authentic UI reveal"
+      },
+      "transition": {
+        "type": "shared-element",
+        "shared_element": "blue-dot",
+        "entry_state": "parking anchor carries dot",
+        "exit_state": "dot returns to route line",
+        "seam_note": "Parking marker collapses into final brand motif"
+      },
+      "sound": {
+        "cue_label": "Payoff arrival (illustrative)",
+        "cue_time_sec": 10.2,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "parking focal point from S04",
+        "exit": "one clean line leading to brand frame"
+      },
+      "keyframe_notes": [
+        "9.5s — parking card enters from the already visible marker",
+        "11.0s — static read hold, legibility prioritized",
+        "12.5s — line pulls forward into brand resolve"
+      ],
+      "technique_refs": [
+        "Motion Playbook: masked reveal",
+        "Motion Playbook: deliberate hold"
+      ]
+    },
+    {
+      "id": "S06",
+      "start_sec": 12.5,
+      "end_sec": 15,
+      "purpose": "Resolve single route motif into ParkGo identity",
+      "why_this_scene": "Creates a clear ending that unifies the shown features and identifies the app.",
+      "subject": "Approved 澳泊 / ParkGo wordmark and app icon (asset required)",
+      "source_status": "concept",
+      "on_screen_text": [
+        "澳泊",
+        "ParkGo"
+      ],
+      "frame": {
+        "composition": "Quiet centered identity only at ending, not a generic intro card",
+        "focal_point": "approved logo lockup",
+        "safe_area": "Leave room for app-store endcard if later requested"
+      },
+      "camera": {
+        "type": "locked brand frame",
+        "movement": "none"
+      },
+      "action": "The blue route point becomes the icon accent; approved wordmark is unveiled.",
+      "motion": {
+        "motivation": "Pay off persistent visual metaphor",
+        "easing": "short decisive settle, then quiet hold",
+        "signature_move": "Shared-dot into logo accent"
+      },
+      "transition": {
+        "type": "shared-element end",
+        "shared_element": "blue-dot",
+        "entry_state": "dot at logo's matching anchor",
+        "exit_state": "approved logo static",
+        "seam_note": "Must match supplied icon; do not redraw an imaginary brand"
+      },
+      "sound": {
+        "cue_label": "Final resolved phrase (illustrative)",
+        "cue_time_sec": 13.2,
+        "status": "illustrative"
+      },
+      "continuity": {
+        "entry": "route line from S05 narrows to a point",
+        "exit": "clean wordmark on off-white field"
+      },
+      "keyframe_notes": [
+        "12.5s — transit line lands as a small mark",
+        "13.2s — authentic logo appears via a one-time mask",
+        "15.0s — stable branded end frame, enough time to read"
+      ],
+      "technique_refs": [
+        "Motion Playbook: object-to-logo continuity",
+        "Motion Playbook: brand resolve"
+      ]
+    }
+  ],
+  "plugin_capability_status": "NOT_CHECKED",
+  "requirements": [
+    "Use installed Remotion Plugin Agent Skills if discoverable; never assert invoked without actual tool/skill execution.",
+    "Keep shared-timeline.json as source of scene times for picture and sound.",
+    "Create a Remotion Studio-previewable source project, do not overwrite storyboard or director brief.",
+    "Present key stills and draft before final render; refine from review evidence.",
+    "Deliver a final MP4, time-stamped contact sheet and output manifest; no invented video or metadata.",
+    "Do not represent missing app screenshots, assets or illustrative ETA figures as real.",
+    "Invoke technical preflight and real, isolated aesthetic/holistic jurors after freeze."
+  ]
+}

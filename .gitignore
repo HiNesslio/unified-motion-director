@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+# Local render and diagnostics
+out/
+probe/
+renders/
+*.log
+.DS_Store
+# External checkouts / assets fetched on demand
+external/
+node_modules/

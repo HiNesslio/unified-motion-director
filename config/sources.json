@@ -1,0 +1,41 @@
+{
+  "note": "Optional third-party repositories. Branch heads are NOT pinned; record the installed commit hash and audit upstream changes before executing any code.",
+  "repositories": [
+    {
+      "id": "claude-motion-playbook",
+      "url": "https://github.com/PHY041/claude-motion-playbook.git",
+      "role": "research",
+      "license": "CC BY 4.0 for docs/catalog classification, CC0 for templates"
+    },
+    {
+      "id": "claude-motion-director",
+      "url": "https://github.com/abdullatif06/claude-motion-director.git",
+      "role": "optional-film-engine",
+      "license": "MIT"
+    },
+    {
+      "id": "motion-composer-skill",
+      "url": "https://github.com/designbysuren/motion-composer-skill.git",
+      "role": "optional-technique-router",
+      "license": "MIT"
+    },
+    {
+      "id": "claude-motion-skill",
+      "url": "https://github.com/Hype-yolo/claude-motion-skill.git",
+      "role": "optional-source-assisted-engine",
+      "license": "MIT for project tools; many third-party components/models use independent licenses; see upstream THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "id": "howseen-claude-motion-design",
+      "url": "https://github.com/howseen-ai/claude-motion-design.git",
+      "role": "optional-deterministic-html-seek-motion-blur-backend",
+      "license": "MIT for code; source music, photography, logos and fonts separately licensed"
+    },
+    {
+      "id": "whaleyxbt-claude-motion",
+      "url": "https://github.com/whaleyxbt/claude-motion.git",
+      "role": "optional-remotion-audio-and-web-sim-backend",
+      "license": "MIT for repository code; Remotion has a separate license; external assets/fonts individually licensed"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent motion design juror report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["judge", "reviewer_name", "media_sha256", "evidence_level", "inspected_frames", "dimensions", "blockers", "fixes", "confidence", "limitations"],
+  "properties": {
+    "judge": {"enum": ["aesthetic", "holistic"]},
+    "reviewer_name": {"type": "string"},
+    "media_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_level": {"const": "DECODED_VIDEO"},
+    "inspected_frames": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "dimensions": {"type": "object", "additionalProperties": {"type": "object", "required": ["score", "status", "evidence"], "properties": {"score": {"type": ["number", "null"], "minimum": 0, "maximum": 10}, "status": {"enum": ["evaluated", "not_applicable", "not_evaluated"]}, "evidence": {"type": "array", "items": {"type": "object", "required": ["time_sec", "observation"], "properties": {"time_sec": {"type": "number", "minimum": 0}, "observation": {"type": "string", "minLength": 6}}}}}},
+    "blockers": {"type": "array", "items": {"type": "object", "required": ["kind", "time_sec", "reason"], "properties": {"kind": {"type": "string"}, "time_sec": {"type": ["number", "null"]}, "reason": {"type": "string"}}}},
+    "fixes": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["priority", "time_sec", "issue", "action"], "properties": {"priority": {"enum": ["P1", "P2", "P3"]}, "time_sec": {"type": "number", "minimum": 0}, "issue": {"type": "string"}, "action": {"type": "string"}, "expected_gain": {"type": "string"}}}},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

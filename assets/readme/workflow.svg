@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="414" viewBox="0 0 1200 414" role="img" aria-labelledby="title desc">
+<title id="title">Unified Motion Director production timeline</title>
+<desc id="desc">One structured timeline connects creative direction, Remotion production, technical inspection, and two independent reviews before release.</desc>
+<rect width="1200" height="414" rx="24" fill="#111318"/>
+<g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif">
+ <text x="54" y="74" font-size="20" letter-spacing="3" fill="#8CA2B9" font-weight="700">CODEX / CREATIVE PRODUCTION</text>
+ <text x="54" y="134" font-size="52" fill="#F2F5F8" font-weight="750">One timeline. One film.</text>
+ <text x="55" y="170" font-size="22" fill="#AAB7C5">Direction, production and independent acceptance, in sync.</text>
+ <!-- sequence baseline -->
+ <path d="M90 270 H1112" fill="none" stroke="#394452" stroke-width="2" />
+ <!-- nodes -->
+ <rect x="54" y="218" width="282" height="104" rx="14" fill="#202630" stroke="#475362"/>
+ <path d="M76 270 H96 M86 260 V280" stroke="#84B5FF" stroke-width="2.5" fill="none"/>
+ <text x="115" y="257" font-size="24" font-weight="700" fill="#F2F5F8">DIRECT</text>
+ <text x="115" y="289" font-size="19" fill="#B6C2CD">Brief / storyboard</text>
+ <rect x="358" y="218" width="282" height="104" rx="14" fill="#202630" stroke="#475362"/>
+ <path d="M380 255 L398 270 L380 285 Z" fill="none" stroke="#84B5FF" stroke-width="2.5"/>
+ <text x="417" y="257" font-size="24" font-weight="700" fill="#F2F5F8">BUILD</text>
+ <text x="417" y="289" font-size="19" fill="#B6C2CD">Remotion + sound</text>
+ <rect x="662" y="218" width="218" height="104" rx="14" fill="#202630" stroke="#475362"/>
+ <path d="M687 266 L698 277 L716 253" stroke="#84B5FF" stroke-width="3" fill="none"/>
+ <text x="731" y="257" font-size="24" font-weight="700" fill="#F2F5F8">VERIFY</text>
+ <text x="731" y="289" font-size="19" fill="#B6C2CD">Rendered MP4</text>
+ <rect x="902" y="218" width="244" height="104" rx="14" fill="#213041" stroke="#5B80B1"/>
+ <g fill="#84B5FF"><circle cx="928" cy="255" r="5"/><circle cx="948" cy="255" r="5"/></g>
+ <text x="963" y="257" font-size="24" font-weight="700" fill="#F2F5F8">REVIEW</text>
+ <text x="925" y="289" font-size="19" fill="#B6C2CD">2 isolated jurors</text>
+ <text x="56" y="371" font-size="17" fill="#94A6B8">Creative direction</text>
+ <text x="398" y="371" font-size="17" fill="#94A6B8">Single time source</text>
+ <text x="719" y="371" font-size="17" fill="#94A6B8">SHA-bound evidence</text>
+ <text x="944" y="371" font-size="17" fill="#94A6B8">85+ to pass</text>
+ </g>
+</svg>

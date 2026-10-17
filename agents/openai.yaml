@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unified Motion Director"
+  short_description: "Direct motion films with Remotion Plugin collaboration and independent jurors"
+  default_prompt: "Use $unified-motion-director to plan and storyboard the film; when available, collaborate with $remotion for React animation, Studio preview and rendering; then independently review the actual MP4 with two jurors."

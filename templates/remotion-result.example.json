@@ -1,0 +1,17 @@
+{
+  "schema": "umd.remotion-result.v1",
+  "handoff_id": "remotion-REPLACE_FROM_HANDOFF",
+  "storyboard_sha256": "REPLACE_FROM_HANDOFF",
+  "engine": "remotion-plugin-or-cli",
+  "plugin_invoked": false,
+  "composition_id": "YourCompositionId",
+  "fps": 30,
+  "outputs": {
+    "draft_mp4": "out/draft.mp4",
+    "final_mp4": "out/final.mp4",
+    "contact_sheet": "out/contact-sheet.png",
+    "preview_stills": "out/stills"
+  },
+  "final_sha256": "SHA256_OF_ACTUAL_FINAL_MP4",
+  "notes": "Provide genuine paths and data; plugin_invoked only true when actually used."
+}
