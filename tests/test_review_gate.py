@@ -20,7 +20,8 @@ class ReviewGateTest(unittest.TestCase):
         cls.video=cls.path/'synthetic.mp4'
         subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','lavfi',
             '-i','testsrc2=size=320x180:rate=24','-t','2','-c:v','mpeg4',str(cls.video)],check=True)
-        subprocess.run([sys.executable,str(ROOT/'scripts'/'review_gate.py'),'prepare',str(cls.video),'--out',str(cls.path/'review'),'--samples','8','--audio-policy','silent','--rights-status','confirmed'],check=True,capture_output=True)
+        proc=subprocess.run([sys.executable,str(ROOT/'scripts'/'review_gate.py'),'prepare',str(cls.video),'--out',str(cls.path/'review'),'--samples','8','--audio-policy','silent','--rights-status','confirmed'],capture_output=True,text=True)
+        if proc.returncode: raise RuntimeError(f'review preparation failed: {proc.stderr[-2500:]}')
     @classmethod
     def tearDownClass(cls): cls.tmp.cleanup()
 

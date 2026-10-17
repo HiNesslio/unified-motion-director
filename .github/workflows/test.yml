@@ -13,7 +13,7 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install optional validation dependencies
-        run: python3 -m pip install numpy scipy jsonschema
+        run: python3 -m pip install numpy scipy jsonschema pillow
       - name: Run tests
         run: python3 -m unittest discover -s tests -v
       - name: Validate neutral fixture
