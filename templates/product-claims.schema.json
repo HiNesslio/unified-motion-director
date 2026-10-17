@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Product claim evidence registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "product_id",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "product_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "claim",
+          "implementation_status",
+          "data_status",
+          "display_mode",
+          "approved_for_public_copy",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 4
+          },
+          "implementation_status": {
+            "enum": [
+              "shipped",
+              "beta",
+              "experimental",
+              "planned",
+              "retired"
+            ]
+          },
+          "data_status": {
+            "enum": [
+              "verified",
+              "illustrative",
+              "unknown"
+            ]
+          },
+          "display_mode": {
+            "enum": [
+              "factual_demo",
+              "concept_demo",
+              "omitted"
+            ]
+          },
+          "approved_for_public_copy": {
+            "type": "boolean"
+          },
+          "disclosure": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "checked_at",
+                "evidence_type"
+              ],
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "minLength": 3
+                },
+                "checked_at": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "evidence_type": {
+                  "enum": [
+                    "approved_product_ui",
+                    "release_note",
+                    "implementation",
+                    "test_result",
+                    "approved_documentation",
+                    "producer_attestation"
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "evidence_reviewer": {
+            "type": "string",
+            "minLength": 2
+          },
+          "evidence_reviewed_at": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

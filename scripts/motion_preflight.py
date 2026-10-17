@@ -64,7 +64,7 @@ def scan_candidates(path, fps, width=64, max_seconds=180):
             'limit_note':f'Scanned encoded frames at {scan_rate} fps (up to 60 fps and {max_seconds}s), downscaled spatially; full-resolution cut strips still required.'}
 
 
-def inspect(path, storyboard=None, sample=True, max_seconds=180):
+def inspect(path, storyboard=None, sample=True, max_seconds=180, layout_manifest=None):
     path=Path(path)
     if not path.is_file():raise FileNotFoundError(path)
     h=hashlib.sha256()
@@ -109,6 +109,15 @@ def inspect(path, storyboard=None, sample=True, max_seconds=180):
             issues.append({'type':'very_dark_first_frame','severity':'REVIEW','reason':'Might be a deliberate opening. Check platform thumbnail and brief.'})
         if scan['candidate_count']:
             issues.append({'type':'flash_or_cut_review_candidates','severity':'REVIEW','count':scan['candidate_count']})
+    if layout_manifest is not None:
+        from mobile_readability import inspect_layout
+        doc=json.loads(Path(layout_manifest).read_text(encoding='utf-8'))
+        result['mobile_readability']=inspect_layout(doc)
+        if result['mobile_readability']['issues']:
+            issues.append({'type':'mobile_readability_review_candidates','severity':'REVIEW',
+                           'count':len(result['mobile_readability']['issues'])})
+    else:
+        result['mobile_readability']={'status':'NOT_EVALUATED','reason':'No renderer-measured text layout manifest was supplied'}
     return result
 
 
@@ -116,12 +125,13 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('video',type=Path)
     ap.add_argument('--storyboard',type=Path)
+    ap.add_argument('--layout-manifest',type=Path)
     ap.add_argument('--out',type=Path)
     ap.add_argument('--no-frame-scan',action='store_true')
     ap.add_argument('--max-scan-seconds',type=int,default=180)
     a=ap.parse_args()
     try:
-        report=inspect(a.video,a.storyboard,not a.no_frame_scan,a.max_scan_seconds)
+        report=inspect(a.video,a.storyboard,not a.no_frame_scan,a.max_scan_seconds,a.layout_manifest)
     except (OSError,ValueError,RuntimeError,subprocess.SubprocessError) as e:
         ap.exit(2,f'Preflight failed: {e}\n')
     x=json.dumps(report,indent=2,ensure_ascii=False)+'\n'

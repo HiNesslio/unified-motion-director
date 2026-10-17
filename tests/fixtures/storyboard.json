@@ -1,0 +1,287 @@
+{
+  "film_id": "test-neutral-interface",
+  "title": "Neutral UI test fixture",
+  "concept": "A minimal six-shot illustrative interface sequence for regression checks only.",
+  "duration_sec": 15,
+  "fps": 30,
+  "aspect_ratios": [
+    "16:9"
+  ],
+  "audio": {
+    "voiceover": false,
+    "music": "placeholder file not supplied",
+    "timing_status": "illustrative"
+  },
+  "scenes": [
+    {
+      "id": "S01",
+      "start_sec": 0.0,
+      "end_sec": 2.5,
+      "purpose": "Demonstrate interface state 1",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 1"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 0.5
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "0.0s entered",
+        "2.5s settled"
+      ]
+    },
+    {
+      "id": "S02",
+      "start_sec": 2.5,
+      "end_sec": 5.0,
+      "purpose": "Demonstrate interface state 2",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 2"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 3.0
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "2.5s entered",
+        "5.0s settled"
+      ]
+    },
+    {
+      "id": "S03",
+      "start_sec": 5.0,
+      "end_sec": 7.5,
+      "purpose": "Demonstrate interface state 3",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 3"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 5.5
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "5.0s entered",
+        "7.5s settled"
+      ]
+    },
+    {
+      "id": "S04",
+      "start_sec": 7.5,
+      "end_sec": 10.0,
+      "purpose": "Demonstrate interface state 4",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 4"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 8.0
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "7.5s entered",
+        "10.0s settled"
+      ]
+    },
+    {
+      "id": "S05",
+      "start_sec": 10.0,
+      "end_sec": 12.5,
+      "purpose": "Demonstrate interface state 5",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 5"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 10.5
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "10.0s entered",
+        "12.5s settled"
+      ]
+    },
+    {
+      "id": "S06",
+      "start_sec": 12.5,
+      "end_sec": 15.0,
+      "purpose": "Demonstrate interface state 6",
+      "why_this_scene": "Reveals one interface state before transitioning to the next.",
+      "subject": "Generic application user interface",
+      "source_status": "illustrative",
+      "on_screen_text": [
+        "Interface state 6"
+      ],
+      "frame": {
+        "composition": "Single centered card",
+        "focal_point": "Interface heading",
+        "safe_area": "Inside frame margins"
+      },
+      "camera": {
+        "type": "locked",
+        "movement": "static"
+      },
+      "action": "Show state transition",
+      "motion": {
+        "motivation": "Explain sequence",
+        "easing": "ease out",
+        "signature_move": "content reveal"
+      },
+      "transition": {
+        "type": "crossfade",
+        "shared_element": "interface card",
+        "seam_note": "Preserve content geometry"
+      },
+      "sound": {
+        "cue_label": "Illustrative pulse",
+        "status": "illustrative",
+        "cue_time_sec": 13.0
+      },
+      "continuity": {
+        "entry": "card enters",
+        "exit": "card remains"
+      },
+      "keyframe_notes": [
+        "12.5s entered",
+        "15.0s settled"
+      ]
+    }
+  ]
+}

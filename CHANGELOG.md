@@ -1,3 +1,13 @@
+## v1.7 — Product Storytelling & Precision Motion (2026-10-17)
+
+- Product Story Intelligence (causal product-to-motion story decisions), editable visual direction presets, and eight semantic motion patterns.
+- Product Truth evidence manifest schema, explicit factual/concept policies, source/approval attestation, storyboard-reference checks and review-gate hash binding.
+- Intra-shot event anchors, semantic typography cues and optional beat/visual-preset metadata, backward compatible with earlier storyboard files.
+- NumPy audio-onset/energy analysis for *candidate only* BPM, beat and drop suggestions (with file hash, not mislabelled as human-verified).
+- Renderer-measured mobile text geometry/hold heuristics, optional in `motion_preflight.py`, never mistaken for aesthetic approval.
+- Remotion shared-timeline handoff preserves new precision/claim fields; existing dual Codex juror 55/45 acceptance remains unchanged.
+- Removed all product-specific public examples and related documentation; tests now use neutral fixture data.
+
 # Changelog
 
 ## v1.6 — Remotion Plugin collaborative production (2026-10-17)

@@ -2,7 +2,6 @@ name: Test skill
 on:
   push:
   pull_request:
-
 jobs:
   unittest:
     runs-on: ubuntu-latest
@@ -13,9 +12,9 @@ jobs:
           python-version: '3.11'
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
-      - name: Install Python dependencies
-        run: python3 -m pip install Pillow
+      - name: Install optional validation dependencies
+        run: python3 -m pip install numpy scipy jsonschema
       - name: Run tests
         run: python3 -m unittest discover -s tests -v
-      - name: Validate example storyboard
-        run: python3 scripts/validate_storyboard.py examples/parkgo/storyboard.json
+      - name: Validate neutral fixture
+        run: python3 scripts/validate_storyboard.py tests/fixtures/storyboard.json

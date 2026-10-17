@@ -14,7 +14,7 @@ import motion_preflight
 class IntegrationV15Test(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.storyboard=json.loads((ROOT/'examples/parkgo/storyboard.json').read_text())
+        cls.storyboard=json.loads((ROOT/'tests/fixtures/storyboard.json').read_text())
 
     def test_two_sources_and_license_metadata(self):
         sources=json.loads((ROOT/'config/sources.json').read_text())['repositories']
@@ -45,7 +45,7 @@ class IntegrationV15Test(unittest.TestCase):
     def test_cli_writes_only_plans(self):
         with tempfile.TemporaryDirectory() as td:
             out=Path(td)/'plans'
-            proc=subprocess.run([sys.executable,str(ROOT/'scripts/production_router.py'),str(ROOT/'examples/parkgo/storyboard.json'),'--out',str(out)],capture_output=True,text=True)
+            proc=subprocess.run([sys.executable,str(ROOT/'scripts/production_router.py'),str(ROOT/'tests/fixtures/storyboard.json'),'--out',str(out)],capture_output=True,text=True)
             self.assertEqual(proc.returncode,0,proc.stderr)
             self.assertEqual(sorted(x.name for x in out.iterdir()),['PRODUCTION_HANDOFF.md','production-plan.json','shared-timeline.json'])
             self.assertIn('not yet performed', (out/'PRODUCTION_HANDOFF.md').read_text().lower())

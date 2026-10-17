@@ -37,7 +37,8 @@ def build(film, engine):
     prev=0.0
     timeline={'schema':'umd.shared-timeline.v1', 'film_id':film.get('film_id','untitled'),
               'fps':fps,'duration_sec':duration,'timing_status':film.get('audio',{}).get('timing_status','unknown'),
-              'source':'storyboard.json', 'scenes':{}}
+              'source':'storyboard.json', 'visual_preset':film.get('visual_preset'),
+              'beat_grid':film.get('beat_grid'), 'claims_manifest':film.get('claims_manifest'), 'scenes':{}}
     for scene in scenes:
         begin=float(scene['start_sec']); end=float(scene['end_sec'])
         if abs(begin-prev)>1e-5 or end<=begin:
@@ -53,6 +54,10 @@ def build(film, engine):
             'sound_cue_sec':ct,'sound_cue_status':cue.get('status','unknown'),
             'sound_cue_label':cue.get('cue_label',''),
             'transition_type':scene.get('transition',{}).get('type','unknown'),
+            'events':scene.get('events',[]),
+            'typography_cues':scene.get('typography_cues',[]),
+            'motion_pattern':scene.get('motion_pattern'),
+            'claim_refs':scene.get('claim_refs',[]),
         }
         prev=end
     if abs(prev-duration)>1e-5:

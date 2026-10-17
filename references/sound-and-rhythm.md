@@ -22,3 +22,11 @@ Watch without audio. First 1–2 seconds must present a compelling visual subjec
 ## Audio QA
 
 Check length, clipping, silence, license ledger, cue/frame sync and any LUFS requirement. The cue checker must never report pass for a waveform it did not analyze.
+
+## v1.7 beat-aware workflow
+
+1. Decode the actual licensed local music with `scripts/analyze_music.py` (NumPy required, FFmpeg for non-WAV). Record source SHA, tempo candidates, tentative pulse times and energy transitions.
+2. The generated JSON always says `candidate_unverified`. **Listen** to the track and check beat phase, half/double-time and actual drop; only mark a separate reviewed beat grid `human_verified` after ear-and-waveform check.
+3. Use named `beat_ref` only for hero payoff, key numbers and major title entrances. Secondary information enters when readable, not necessarily on the beat.
+4. Keep source audio file/version and visual scene-event clocks consistent. Retiming must regenerate cue and sound timeline; music analysis is not music generation.
+5. Render actual audio and inspect transition sync; audio waveform alone cannot prove perceived mix quality or music licenses.

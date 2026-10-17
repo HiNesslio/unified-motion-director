@@ -11,6 +11,18 @@ Path rule: `SKILL_DIR` means the folder containing this file. Invoke `scripts/*.
 
 This skill synthesizes **observable published techniques**, not Claude Opus 5.5's private reasoning or model weights. Use source research as design evidence, not a promise of identical output or aesthetic.
 
+## v1.7 Product Storytelling & Precision Motion (additive; no new renderer)
+
+For product, SaaS, App and technical explainer films, map **Product → Data → Motion → Story → Brand** before selecting effects. Inspect actual implementation status and evidence rather than inventing features. See `references/product-storytelling.md`. Record product claims in `templates/product-claims.schema.json` and reference stable claim IDs through optional storyboard `claim_refs`. Any claim-referencing storyboard **must** name `claims_manifest`, and `validate_storyboard.py` / Remotion handoff / review prepare reject unsupported claims. Product truth cannot be compensated by aesthetic score. Producer attestation of evidence is necessary; CLI validation cannot prove a source is truthful.
+
+Storyboards may add `events[]` (intra-shot exact absolute times), `typography_cues[]` (semantic phrase groups, revealed/read/exited intervals), `motion_pattern`, `visual_preset`, `beat_grid` (candidate vs human-verified status), and `claim_refs`. Old scenes without these fields remain valid. `production_router.py` propagates them to shared timelines; Remotion must implement them rather than inventing new timing.
+
+Analyze actual licensed audio with `scripts/analyze_music.py`; it produces **candidate_unverified** beat/drop data, NOT a measured/human-verified song grid. Main titles/payoffs may align to verified downbeats; secondary copy should prioritize readability instead of drumming every word. See `references/kinetic-typography.md`, `references/product-motion-patterns.md` and `references/sound-and-rhythm.md`.
+
+Do not force an Apple aesthetic or a fixed background. Choose one dominant visual direction from `references/visual-presets.md`: minimal-editorial, kinetic-product, data-explainer or cinematic-launch (or bespoke), and preserve approved product tokens.
+
+If final media and renderer-measured text bounds exist, use `motion_preflight.py --layout-manifest ...` to surface phone-width glyph size, margin and settled-hold candidates. `NOT_EVALUATED` without evidence; geometry does not certify legibility. Always preserve two isolated aesthetic/holistic jurors, 55/45 weighting and SHA-pinned acceptance. Product Truth is a separate release hard gate.
+
 ## Mandatory operating principles
 
 1. **Truth before spectacle.** Use verified product claims, original screenshots, approved logos, footage and copy; do not invent features, performance numbers, testimonials or interface elements. Distinguish concept frames from real UI. Licenses for imagery, music, typefaces and sound must be recorded.
@@ -44,6 +56,7 @@ Use the smallest viable subset. A one-button microinteraction needs an intention
 
 - **Always**: [`references/director-taste.md`](references/director-taste.md) and [`references/source-router.md`](references/source-router.md).
 - Public Opus 5.5 gallery examples or requests to reproduce a reference *style*: read [`references/opus-gallery-learning.md`](references/opus-gallery-learning.md) then selectively consult [`references/opus-casebook.md`](references/opus-casebook.md).
+- Product SaaS feature films: [`references/product-storytelling.md`](references/product-storytelling.md), [`references/kinetic-typography.md`](references/kinetic-typography.md), [`references/product-motion-patterns.md`](references/product-motion-patterns.md) and [`references/visual-presets.md`](references/visual-presets.md).
 - Narrative / creative concept / copy: [`references/narrative-and-direction.md`](references/narrative-and-direction.md).
 - Shot list / image storyboard / camera: [`references/storyboard-language.md`](references/storyboard-language.md).
 - Timing / transitions / physical motion: [`references/motion-choreography.md`](references/motion-choreography.md).
@@ -80,13 +93,13 @@ Never assume two independent ChatGPT chats share files or can call each other's 
 - **whaleyxbt claude-motion**: optional Remotion component/audio engine **or** deterministic three.js web-sim capture. Its timing/sound source-of-truth and beat-sheet QA improve any backend. Upstream MIT code; check Remotion license independently. See `references/whaley-motion-toolkit.md`.
 - All external projects are **optional**. Missing tools means deliver an honest storyboard/spec/code draft or choose a locally available method, not fake MP4 output.
 
-Use `python3 scripts/hype_motion_bridge.py --plan --storyboard examples/parkgo/storyboard.json` to create a safe, reviewable route/scene command plan; `--handoff` exports an original director-to-source adaptation checklist. This bridge does not run upstream scripts or install dependencies.
+Use `python3 scripts/hype_motion_bridge.py --plan --storyboard /path/to/your-film/storyboard.json` to create a safe, reviewable route/scene command plan; `--handoff` exports an original director-to-source adaptation checklist. This bridge does not run upstream scripts or install dependencies.
 
 See [`references/source-router.md`](references/source-router.md). `python3 scripts/source_manager.py --status` checks source presence, `--plan` prints an optional clone plan, and `--install` performs network clones ONLY with explicit user permission. After installing Playbook, `python3 scripts/technique_lookup.py --query "UI morph camera"` searches upstream techniques in place without copying the catalogue. This package contains no copied source-video or prompt corpus.
 
 ## v1.5: choose an executable production lane, then verify actual frames
 
-After storyboard validation, run `python3 scripts/production_router.py examples/parkgo/storyboard.json --out /path/to/film-plan --engine auto`. This writes an **engine-neutral** `shared-timeline.json` and `production-plan.json` plus a Markdown handoff. `auto` suggests a route based on documented criteria; it does **not** auto-install backends, convert scenes to runnable code or verify musical beats. Choose between:
+After storyboard validation, run `python3 scripts/production_router.py /path/to/your-film/storyboard.json --out /path/to/film-plan --engine auto`. This writes an **engine-neutral** `shared-timeline.json` and `production-plan.json` plus a Markdown handoff. `auto` suggests a route based on documented criteria; it does **not** auto-install backends, convert scenes to runnable code or verify musical beats. Choose between:
 
 - `html-seek`: Howseen-style `window.seek(t)` for custom graphic transformations and controlled subframe/motion-blur renders.
 - `remotion`: whaley-style shared named timeline + reusable React scenes; sound events read the same timeline. Use when typography, product UI and clips dominate.
@@ -106,7 +119,7 @@ Two curated galleries provide prompts and videos: Prompt Motion and Skillry (ori
 3. Define *one dominant organizing principle* (shared object / camera-world / editorial cuts / measured graphic grid / character action). Do not mix five styles.
 4. For references, extract a **design grammar** (movement, pacing, framing, emotional temperature) without recreating source shots. If only prompts/posters are available, do not present timing and transitions as direct observations.
 5. Design three candidates if a direction is undecided: `restrained-editorial`, `kinetic-product`, `spatial-cinematic`; record why one wins.
-6. Storyboard with `templates/storyboard.schema.json`, `templates/storyboard.example.json`; scene entries must provide purpose, subject, time, camera, motion, transition and authenticity flag.
+6. Storyboard with `templates/storyboard.schema.json`; scene entries must provide purpose, subject, time, camera, motion, transition and authenticity flag.
 7. Maintain a `seam_ledger`: outgoing geometry and incoming geometry should align for morph/handoff; if using cuts, explain motivation.
 8. For music, derive beats from **actual licensed audio** when possible. Otherwise label beat timings as illustrative and do not claim waveform peak alignment.
 9. Choose technology based on output: SVG/CSS for lightweight icon, GSAP for deterministic web choreography, Remotion for React-based film, HyperFrames/Motion Director where installed, Canvas/WebGL/Three.js for spatial render. Exact stack versions vary; verify locally.
@@ -151,7 +164,7 @@ python3 scripts/review_gate.py run --bundle out/review-v1 --project /path/to/you
 - **Implementation**: engine / files / versions / reproducible instructions for the actual deliverable.
 - **Independent QA and truth report**: separately produced aesthetic + holistic scores (only with real jurors), weighted acceptance verdict, timecoded issues, blockers and unknowns. Do not describe non-scored works as “review passed”.
 
-Default response language follows the user's language; preserve product-specific typography and copy style. Use `examples/parkgo/` only as an example, never infer ParkGo is the brand for unrelated tasks.
+Default response language follows the user's language; preserve product-specific typography and copy style. Do not hardcode any brand or product example into this generic Skill; inspect each actual project instead.
 
 ## Stop and escalation rules
 

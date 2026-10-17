@@ -28,7 +28,7 @@ def canonical_id(storyboard:Path):
 
 def prepare(storyboard:Path,out:Path,brief=None,look=None):
     data=json.loads(storyboard.read_text(encoding='utf-8'))
-    structural_errors,structural_warnings=validate_storyboard.validate(data)
+    structural_errors,structural_warnings=validate_storyboard.validate(data, storyboard.resolve().parent)
     if structural_errors:
         raise ValueError('invalid storyboard: '+'; '.join(structural_errors[:6]))
     timeline,_=production_router.build(data,'remotion')
@@ -47,13 +47,17 @@ def prepare(storyboard:Path,out:Path,brief=None,look=None):
       'execution_owner':'remotion-plugin-if-available-else-codex-remotion',
       'acceptance_owner':'two-independent-codex-jurors',
       'claims_and_assets':data.get('assets',[]),
+      'claims_manifest':data.get('claims_manifest'),
+      'visual_preset':data.get('visual_preset'),
+      'beat_grid':data.get('beat_grid'),
       'audio':data.get('audio',{}),
       'scenes':data['scenes'],
       'storyboard_warnings':structural_warnings,
       'plugin_capability_status':'NOT_CHECKED',
       'requirements':[
         'Use installed Remotion Plugin Agent Skills if discoverable; never assert invoked without actual tool/skill execution.',
-        'Keep shared-timeline.json as source of scene times for picture and sound.',
+        'Keep shared-timeline.json as source of scene times, intra-shot events and typographic cues for picture and sound.',
+        'Treat Product Truth Gate as separate mandatory blocker for any claim_refs. Concept-demo disclosures must remain visible.',
         'Create a Remotion Studio-previewable source project, do not overwrite storyboard or director brief.',
         'Present key stills and draft before final render; refine from review evidence.',
         'Deliver a final MP4, time-stamped contact sheet and output manifest; no invented video or metadata.',

@@ -1,5 +1,11 @@
 # Independent post-render acceptance: film-first, score-second
 
+## v1.7 Product Truth precondition
+
+Product truth is an **independent publication hard gate**; the 55/45 judging model remains unchanged. For storyboards declaring a `claims_manifest`, preparing a review validates the declared claims and pins the claims file hash. Aggregation blocks release when the manifest disappears, changes or fails the product-claim checks. Disclosed experimental or illustrative claims are allowed only as `concept_demo`; unapproved factual UI/ETA/product metrics are never allowed. This gate verifies structured evidence plus named producer attestation, **not the underlying truth of documents**. Reviewers should report any visible mismatch; they do not replace source verification.
+
+Typography / UI fidelity / sound sync / phone-size legibility / scene economy are supplemental critique requirements, not new scoring weights. Geometry and beat analyzers give candidates, never automatic taste PASS. If the final footage cannot be decoded, or jurors cannot examine actual frames, hold evidence rather than awarding scores.
+
 ## Required architecture
 
 - Production (director/implementer) **stops editing** once a candidate MP4 is frozen. Hash the video and generate a review evidence bundle (`scripts/review_gate.py prepare`). Every re-render has a *new* SHA-256 and must be scored anew.

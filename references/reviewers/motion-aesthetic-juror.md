@@ -19,3 +19,5 @@ Read ONLY the evidence bundle paths explicitly handed to you (metadata, contact 
 
 ## Output format
 Return **only one JSON object**, no Markdown or code fences. Match `templates/juror-report.schema.json`. Set `judge` exactly `aesthetic`, `reviewer_name` exactly `motion-aesthetic-juror`, `evidence_level` exactly `DECODED_VIDEO`, `media_sha256` unchanged from the input. **Do not invent a score if the frames could not be inspected.** Do not calculate composite or declare PASS; aggregation is external.
+
+Additional v1.7 checks: verify readable type at phone preview size (not imagined), semantic CJK phrase breaks, stable UI-to-abstract shared elements, one focal point, use of project identity rather than generic preset styling, and any release-defeating misleading visual implication. Report exactly what rendered evidence supports each opinion.

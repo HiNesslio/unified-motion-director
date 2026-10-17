@@ -23,7 +23,7 @@ SUBFIELDS = {
 }
 
 
-def validate(data):
+def validate(data, base_dir=None):
     errors, warnings = [], []
     if not isinstance(data, dict):
         return ["Top-level storyboard must be an object"], warnings
@@ -94,6 +94,34 @@ def validate(data):
             errors.append(f"{ctx}.on_screen_text: expected list of strings")
         if not isinstance(s.get("keyframe_notes"), list) or not s["keyframe_notes"]:
             errors.append(f"{ctx}.keyframe_notes: at least one keyframe required")
+        # v1.7 additive fields; the original storyboard contract stays valid.
+        claim_refs=s.get('claim_refs', [])
+        if not isinstance(claim_refs,list) or not all(isinstance(x,str) and x for x in claim_refs) or len(set(claim_refs))!=len(claim_refs):
+            errors.append(f"{ctx}.claim_refs: must be unique nonempty IDs")
+            claim_refs=[]
+        if claim_refs and not data.get('claims_manifest'):
+            errors.append(f"{ctx}: claim_refs requires top-level claims_manifest (Product Truth hard gate)")
+        for j, event in enumerate(s.get('events', [])):
+            if not isinstance(event,dict):errors.append(f"{ctx}.events[{j}]: expected object");continue
+            t=event.get('time_sec')
+            if isinstance(t,bool) or not isinstance(t,(int,float)) or not math.isfinite(t) or not isinstance(st,(int,float)) or not isinstance(en,(int,float)) or t<st-1e-8 or t>en+1e-8:
+                errors.append(f"{ctx}.events[{j}]: time_sec outside owning scene")
+            if not isinstance(event.get('action'),str) or not event['action'].strip(): errors.append(f"{ctx}.events[{j}]: action required")
+            if not isinstance(event.get('claim_refs',[]),list) or any(x not in claim_refs for x in event.get('claim_refs',[])):
+                errors.append(f"{ctx}.events[{j}]: event claims must be declared by the owning scene")
+        for j,cue in enumerate(s.get('typography_cues', [])):
+            if not isinstance(cue,dict):errors.append(f"{ctx}.typography_cues[{j}]: expected object");continue
+            times=[cue.get(k) for k in ('enter_sec','settle_sec','exit_sec')]
+            if not all(isinstance(t,(int,float)) and not isinstance(t,bool) and math.isfinite(t) for t in times) or not (st<=times[0]<=times[1]<=times[2]<=en):
+                errors.append(f"{ctx}.typography_cues[{j}]: time order must be within owning scene")
+            groups=cue.get('groups')
+            if not isinstance(groups,list) or not groups or not all(isinstance(g,str) and g.strip() for g in groups):
+                errors.append(f"{ctx}.typography_cues[{j}]: semantic groups required")
+            elif ''.join(''.join(groups).split())!=''.join(str(cue.get('text','')).split()):
+                errors.append(f"{ctx}.typography_cues[{j}]: concatenated groups must match the actual text")
+            hold=cue.get('reading_hold_sec')
+            if hold is not None and (not isinstance(hold,(int,float)) or isinstance(hold,bool) or hold<0 or (isinstance(times[1],(int,float)) and isinstance(times[2],(int,float)) and hold>times[2]-times[1]+1e-8)):
+                errors.append(f"{ctx}.typography_cues[{j}]: reading_hold_sec exceeds settled interval")
         source = s.get("source_status")
         if source not in ("verified", "concept", "illustrative"):
             errors.append(f"{ctx}.source_status: invalid {source!r}")
@@ -112,6 +140,33 @@ def validate(data):
         errors.append(f"Story ends at {last_end:.3f}s but film duration is {duration:.3f}s")
     if data.get("audio", {}).get("timing_status") == "measured" and not data.get("audio", {}).get("music"):
         errors.append("Measured music timing needs a music source in audio.music")
+    bg=data.get('beat_grid')
+    if bg is not None and (not isinstance(bg,dict) or bg.get('status') not in ('candidate_unverified','human_verified','illustrative')):
+        errors.append('beat_grid status invalid')
+    claims_path=data.get('claims_manifest')
+    if claims_path:
+        if not isinstance(claims_path,str):errors.append('claims_manifest must be a filename')
+        elif base_dir is not None:
+            path=(Path(base_dir)/claims_path).resolve()
+            if not path.is_relative_to(Path(base_dir).resolve()):
+                errors.append('claims_manifest must remain within storyboard folder')
+            elif not path.is_file(): errors.append(f'claims_manifest missing: {claims_path}')
+            else:
+                try:
+                    from product_truth import load_and_validate
+                    errors.extend('Product Truth: '+e for e in load_and_validate(path,None))
+                    import json as _json
+                    entries=_json.loads(path.read_text()).get('claims',[])
+                    ids={e['id']:e for e in entries if isinstance(e,dict) and 'id' in e}
+                    for scene in scenes:
+                        if not isinstance(scene,dict):continue
+                        for ref in scene.get('claim_refs',[]):
+                            if ref not in ids: errors.append(f'{scene.get("id","?")}: unknown claim {ref}')
+                            elif ids[ref].get('display_mode')=='omitted': errors.append(f'{scene.get("id","?")}: omitted claim {ref}')
+                            elif ids[ref].get('display_mode')=='concept_demo' and ids[ref].get('disclosure') not in scene.get('on_screen_text',[]):
+                                errors.append(f'{scene.get("id","?")}: concept claim {ref} missing exact on-screen disclosure')
+                except (OSError,ValueError) as e:errors.append('Product Truth manifest parse error: '+str(e))
+        else: warnings.append('claims_manifest named but no base_dir passed; run CLI for Product Truth validation')
     return errors, warnings
 
 
@@ -125,7 +180,7 @@ def main():
     except (OSError, json.JSONDecodeError) as e:
         print(f"ERROR: cannot load storyboard: {e}", file=sys.stderr)
         return 2
-    errors, warnings = validate(data)
+    errors, warnings = validate(data, args.storyboard.resolve().parent)
     try:
         import jsonschema
         schema = json.loads((Path(__file__).resolve().parents[1]/"templates"/"storyboard.schema.json").read_text(encoding="utf-8"))

@@ -73,6 +73,19 @@ def prepare(a):
     storyboard=a.storyboard.expanduser().resolve() if a.storyboard else None
     if brief and not brief.is_file(): raise ValueError('Brief does not exist')
     if storyboard and not storyboard.is_file(): raise ValueError('Storyboard does not exist')
+    claims_path=None
+    claims_hash=None
+    if storyboard:
+        from validate_storyboard import validate as validate_storyboard
+        from product_truth import load_and_validate
+        story=load_json(storyboard)
+        structural_errors,_=validate_storyboard(story,storyboard.parent)
+        if structural_errors: raise ValueError('Storyboard / Product Truth gate BLOCKED: '+'; '.join(structural_errors[:6]))
+        if story.get('claims_manifest'):
+            claims_path=(storyboard.parent/story['claims_manifest']).resolve()
+            claim_errors=load_and_validate(claims_path,storyboard)
+            if claim_errors:raise ValueError('Product Truth gate BLOCKED: '+'; '.join(claim_errors[:6]))
+            claims_hash=sha256_file(claims_path)
     # Codex v1.5: technical evidence is advisory, never an aesthetic judgement.
     from motion_preflight import inspect as technical_inspect
     technical=technical_inspect(video, storyboard, sample=True)
@@ -86,6 +99,10 @@ def prepare(a):
         'video':str(video), 'video_sha256':info['sha256'], 'file_size_bytes':video.stat().st_size,
         'media':info, 'brief':str(brief) if brief else None,
         'storyboard':str(storyboard) if storyboard else None,
+        'storyboard_sha256':sha256_file(storyboard) if storyboard else None,
+        'claims_manifest':str(claims_path) if claims_path else None,
+        'claims_sha256':claims_hash,
+        'product_truth_gate':'PRODUCER_ATTESTED_STRUCTURAL_CLEAR' if claims_path else 'NO_PRODUCT_CLAIMS_DECLARED',
         'audio_policy':policy, 'rights_status':a.rights_status,
         'contact_sheet':str(out/'visual-evidence'/'contact-sheet.jpg'),
         'frames_dir':str(out/'visual-evidence'/'frames'),
@@ -296,6 +313,22 @@ def aggregate_impl(bundle):
             if isinstance(b,dict): blockers.append(f'{role}: {b.get("kind","issue")} @ {b.get("time_sec","?")}s — {b.get("reason","")}')
         for item in report.get('fixes',[]):
             if isinstance(item,dict): fixes.append(item)
+    if manifest.get('storyboard') and manifest.get('storyboard_sha256'):
+        story_file=Path(manifest['storyboard'])
+        if not story_file.is_file() or sha256_file(story_file)!=manifest['storyboard_sha256']:
+            blockers.append('Storyboard changed after evidence freeze: storyboard SHA-256 mismatch')
+    if manifest.get('claims_manifest'):
+        claimed_file=Path(manifest['claims_manifest'])
+        if not claimed_file.is_file() or sha256_file(claimed_file)!=manifest.get('claims_sha256'):
+            blockers.append('Product Truth gate: claims evidence manifest absent or mutated after review snapshot')
+        else:
+            from product_truth import load_and_validate
+            check_errors=load_and_validate(claimed_file,Path(manifest['storyboard']) if manifest.get('storyboard') else None)
+            blockers.extend('Product Truth gate: '+x for x in check_errors)
+    elif manifest.get('storyboard'):
+        original=load_json(Path(manifest['storyboard']))
+        if original.get('claims_manifest') or any(s.get('claim_refs') for s in original.get('scenes',[])):
+            blockers.append('Product Truth gate: missing registered product claims manifest')
     if manifest['audio_policy']=='unknown': errors.append('Audio intent unknown: set --audio-policy required or silent')
     if manifest['audio_policy']=='required' and not manifest['media']['audio_present']:
         blockers.append('Missing required soundtrack: MP4 has no audio stream')

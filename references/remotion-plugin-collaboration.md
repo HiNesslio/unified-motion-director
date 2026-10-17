@@ -31,7 +31,7 @@ python3 scripts/remotion_plugin_bridge.py prepare path/to/storyboard.json --out 
 The main Codex agent must read the generated `REMOTION_PLUGIN_TASK.md`, then invoke the official Remotion Plugin **in that same Codex workspace** (for example ask `Use $remotion to implement REMOTION_PLUGIN_TASK.md`). Which internal Remotion skill is used depends on the problem:
 
 - `remotion-create` new project, `remotion-markup` JSX/components/timings, `remotion-studio` live preview, `remotion-render` actual output.
-- `remotion-maps` for animated routes/map visuals (useful for ParkGo), `remotion-captions` subtitles, `remotion-interactivity` editable Studio controls, `remotion-docs` to check current API compatibility; others only when appropriate.
+- `remotion-maps` for animated routes/map visuals (useful for your product), `remotion-captions` subtitles, `remotion-interactivity` editable Studio controls, `remotion-docs` to check current API compatibility; others only when appropriate.
 - Studio WebMCP is optional for a browser/Codex configuration that supports it; it is **not** guaranteed to work through every chat surface. Official docs: https://www.remotion.dev/docs/ai/webmcp .
 
 Use the `shared-timeline.json` scene start/end frames and named cues as the *single timing truth*. Picture and sound derive from it. Remotion native `useCurrentFrame()` maps into timeline state. Keep randomness seeded, animations frame-deterministic. Use design tokens and source files; no placeholder footage pretending to be product screens. Separate aspect-ratio compositions should be recomposed, not merely cropped.

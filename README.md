@@ -1,128 +1,83 @@
 # Unified Motion Director
 
-**Director-led motion design for Codex.** Take a product idea from concept and shot list to a rendered film, with one shared timeline, optional Remotion collaboration, and independent post-render acceptance.
+**Product storytelling and precision motion for Codex.** Understand what a real product does, plan a truthful visual story, hand off to Remotion or a deterministic rendering backend, and subject the final encoded film to independent review.
 
-[![Codex Skill](https://img.shields.io/badge/Codex-Agent%20Skill-273448?style=flat-square)](https://developers.openai.com/codex/skills)
-[![Remotion optional](https://img.shields.io/badge/Remotion-optional%20plugin-365D8D?style=flat-square)](https://chatgpt.com/plugins/remotion)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-444?style=flat-square)](https://www.python.org/)
-[![License MIT](https://img.shields.io/badge/License-MIT-555?style=flat-square)](LICENSE)
+<p align="center"><img src="./assets/readme/workflow.svg" width="100%" alt="Director-led production: storyboard, Remotion, actual media verification, and two independent jurors"></p>
 
-<p align="center"><img src="./assets/readme/workflow.svg" width="100%" alt="Pipeline: direct with a structured storyboard, build in Remotion, verify the rendered film, then review with two independent jurors."></p>
+[繁體中文](README.zh-Hant.md) · [Codex Skill](SKILL.md) · [Changelog](CHANGELOG.md) · [Source attribution](ATTRIBUTION.md)
 
-**[繁體中文](README.zh-Hant.md)** · [Skill instructions](SKILL.md) · [Example storyboard](examples/parkgo/storyboard.json) · [Source & attribution](ATTRIBUTION.md)
+## What it does
 
-## See the workflow
+- **Product Story Intelligence**: turn product mechanics into a causal sequence of visible events instead of decorating unrelated features.
+- **Product Truth Gate**: link on-screen product claims to dated supporting evidence, mark concept demos, and block unsubstantiated public claims.
+- **Beat-aware motion**: estimate tempo and strong musical events from a real audio file, explicitly retain uncertainty, and use one named timeline for visuals and sound.
+- **Kinetic typography**: language-aware semantic grouping, readable holds and controlled entrances without a forced house style.
+- **Reusable motion grammar**: Text → UI, UI → Data, Path Draw, Data → Number, Progress Along Path, State Color Transition, Number → UI, Object → Brand.
+- **Studio-ready handoff**: delegate React scene implementation and rendering to the optional official [Remotion Plugin](https://chatgpt.com/plugins/remotion); HTML `seek(t)` and Three.js remain supported.
+- **Trustworthy QA**: frame preflight, geometry-based mobile legibility warnings, verified media hashes, and **two isolated Codex jurors**.
 
-A **15-second ParkGo example** is included as actual structured production material—not as a claimed finished film. Explore the [director brief](examples/parkgo/BRIEF.md), [look direction](examples/parkgo/LOOK.md), [scene storyboard](examples/parkgo/storyboard.json), and [Remotion handoff](examples/parkgo/remotion-handoff/REMOTION_PLUGIN_TASK.md). The example's [HTML storyboard board](examples/parkgo/storyboard-board.html) visualizes shot planning.
+The original acceptance bar is unchanged: **55% visual + 45% holistic; combined ≥85, each ≥80**, with no critical issue. Product truth is a **separate hard gate**, not a way to trade accuracy for aesthetics.
 
-| Stage | What the Skill produces |
-| --- | --- |
-| **Direct** | Verified brief, visual look, narrative arc, camera and shot decisions |
-| **Storyboard** | Frame-bound scene descriptions, readable holds, transitions and a shared timeline |
-| **Build** | An appropriate lane: **Remotion**, deterministic `seek(t)` HTML, or Three.js simulations |
-| **Inspect** | Decoded media, frame-contact sheets, timestamped technical findings and asset provenance |
-| **Review** | Two **separately scoped** jurors: visual aesthetic and holistic film quality |
-| **Accept** | Evidence-gated verdict tied to the final MP4 checksum; revise or rework if necessary |
+## Install
 
-The key design choice: **production agents do not grade their own film.** The review verdict only counts after the actual output exists and each juror inspects evidence from the same immutable render.
-
-## Quick start
-
-### 1. Install the Codex Skill
-
-Requires **Python 3.11+**. Clone this repository, then run the installer from the repository root:
+Python 3.11+ is required. The Skill installs locally; Remotion, FFmpeg and audio-analysis dependencies are optional separate tools.
 
 ```bash
 python3 scripts/install_codex.py --user --apply
-```
-
-This installs the Skill to `~/.agents/skills/unified-motion-director/` and the two jurors to `~/.codex/agents/`. To add it only to a project:
-
-```bash
+# or install into a particular project:
 python3 scripts/install_codex.py --project /path/to/project --apply
 ```
 
-The installer is **dry-run by default** (remove `--apply` to preview its actions) and refuses overwrites unless `--force` is explicitly added. Refresh Codex after installation.
+The installer previews changes until `--apply` is supplied. It requires `--force` to replace an existing installation. Reload Codex, then invoke `$unified-motion-director`.
 
-### 2. Optionally enable Remotion
-
-The [official Remotion Plugin](https://chatgpt.com/plugins/remotion) is installed **separately**, when supported in your workspace. The Skill does **not** install or impersonate that Plugin. Without it, the same storyboard can be handed to a local Remotion CLI setup, or routed to a deterministic HTML or simulation pipeline.
-
-### 3. Give Codex a production brief
+## First use
 
 ```text
 $unified-motion-director
 
-Make a 15-second product film for my app. Use a restrained editorial
-style, one accent colour, real UI captures and a single visual thread.
-Create the brief, look direction, storyboard and shared timeline first.
-If $remotion is available, hand the scene spec to it for rendering.
-After rendering, run technical preflight and two independent juror reviews.
-Fix concrete defects and repeat review (at most two rounds).
-Do not claim release-ready unless the acceptance gate passes.
+Create a truthful, director-led product film. First map product capabilities
+and evidence to visual cause-and-effect. Prepare the brief, look, claims
+manifest, storyboard and named scene events. Use a real licensed music file
+if one is available, and hand production to $remotion when installed.
+Inspect the render, run technical and readability QA, then independently
+review it with both Codex jurors. Never mark release-ready unless the truth
+and acceptance gates pass.
 ```
 
-## Shared timeline → Remotion handoff
-
-Generate an exact storyboard-and-time handoff from the included example:
-
-```bash
-python3 scripts/remotion_plugin_bridge.py prepare \
-  examples/parkgo/storyboard.json \
-  --out /tmp/parkgo-remotion-handoff
-```
-
-This emits `remotion-handoff.json`, `shared-timeline.json`, and `REMOTION_PLUGIN_TASK.md`. Once a real Remotion film has been rendered, write `remotion-result.json` with actual project-relative output paths and verify it:
-
-```bash
-python3 scripts/remotion_plugin_bridge.py verify \
-  --handoff /tmp/parkgo-remotion-handoff/remotion-handoff.json \
-  --result /path/to/video-project/remotion-result.json \
-  --project /path/to/video-project \
-  --out /tmp/parkgo-verification.json
-```
-
-The verification checks existence, decodability, storyboard identity, duration, and media hashes. It **does not** certify that a Plugin ran, or that the film looks good. See [the Remotion integration contract](references/remotion-plugin-collaboration.md).
-
-## Review standard
-
-Two separate Codex agents, if the runtime supports agent spawning, score the **same rendered film** independently. A deterministic gate combines their evaluations:
-
-| Juror | Weight | Focus |
-| --- | ---: | --- |
-| Aesthetic juror | **55%** | Composition, typography, art direction, motion quality, visual coherence |
-| Holistic juror | **45%** | Message, pacing, storytelling, sound, clarity and delivery |
-
-To pass, the composite score must be **≥85/100**, each juror **≥80/100**, and no critical defect or evidence error may remain. Low scores request revision or rework; missing output or reviewer evidence blocks release. Frame SHA, reviewer independence and timestamped evidence are part of the acceptance contract. Read [the independent acceptance guide](references/independent-acceptance.md).
-
-## What is — and is not — included
-
-Included: the orchestration Skill, Codex juror configurations, shot/storyboard schemas, production bridges, local QA scripts, tests, and the ParkGo **planning** example. **Not included:** a Remotion runtime or subscription, the external motion repositories' full source, model weights, third-party videos, copyrighted music, commercial fonts, or a pre-rendered finished ParkGo film.
-
-The workflows were validated with **25 local tests** using structural and synthetic media checks. That is **not** a claim of an executed cross-Plugin film, live Codex subagent judging, or aesthetic scores from an actual deliverable. Install tools and provide real assets to run those steps.
-
-## Development and project layout
+### Production workflow
 
 ```text
-SKILL.md               Main Codex production instructions
-codex-agents/          Independent juror configurations
-references/            Direction, source routing, sound, quality, provenance
-scripts/               Installer, storyboard, Remotion bridge, QA and gates
-templates/             Storyboard and evaluator schemas
-examples/parkgo/       Example brief, storyboard and handoff
-assets/readme/         Editable README diagram
+Product evidence → Truth gate → Director & presets → Storyboard & events
+                → Beat timeline → Remotion / seek(t) / web-sim
+                → Rendered MP4 → Technical + mobile checks
+                → Two isolated jurors → Evidence-bound acceptance
 ```
 
-Run the unit tests:
+```bash
+# Validate actual product claims and a storyboard together:
+python3 scripts/validate_storyboard.py /path/to/film/storyboard.json
+python3 scripts/product_truth.py /path/to/film/claims.json --storyboard /path/to/film/storyboard.json
+
+# Analyze a licensed local song (NumPy required; FFmpeg for non-WAV):
+python3 scripts/analyze_music.py /path/to/track.wav --out /path/to/film/beat-analysis.json
+
+# Select a rendering backend / generate a named timeline:
+python3 scripts/production_router.py /path/to/film/storyboard.json --out /path/to/film/handoff
+python3 scripts/remotion_plugin_bridge.py prepare /path/to/film/storyboard.json --out /path/to/film/remotion-handoff
+
+# Once an actual film and optional UI text-layout manifest exist:
+python3 scripts/motion_preflight.py /path/to/film/final.mp4 --layout-manifest /path/to/film/layout.json --out /path/to/film/preflight.json
+python3 scripts/review_gate.py prepare /path/to/film/final.mp4 --out /path/to/film/review --storyboard /path/to/film/storyboard.json --rights-status confirmed
+```
+
+Products that do not have a claims manifest can use the general creative workflow; any film declaring claim references must pass the Product Truth Gate before a release verdict. The music analyzer outputs **unverified beat candidates**, not music facts. The optional layout analyzer flags measurable text-size/margin/hold violations, not artistic merit. Actual licensed assets and authorized product claims must be supplied by the producer.
+
+See [product storytelling](references/product-storytelling.md), [kinetic typography](references/kinetic-typography.md), [motion patterns](references/product-motion-patterns.md), [visual direction presets](references/visual-presets.md) and [independent acceptance](references/independent-acceptance.md).
+
+## Tests and limits
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-Some media-related cases require `ffmpeg` and `ffprobe` on `PATH`; tests that need unavailable tools are skipped. `pytest` is not required. See [Changelog](CHANGELOG.md) for feature history and [Attribution](ATTRIBUTION.md) for credited influences and asset boundaries.
-
-## Provenance and license
-
-The orchestration code and documentation are licensed under [MIT](LICENSE). Public techniques were researched from [Claude Motion Playbook](https://github.com/PHY041/claude-motion-playbook), [Howseen claude-motion-design](https://github.com/howseen-ai/claude-motion-design), [whaleyxbt/claude-motion](https://github.com/whaleyxbt/claude-motion), [Hype-yolo/claude-motion-skill](https://github.com/Hype-yolo/claude-motion-skill), [Prompt Motion](https://prompt-motion.com), and [Skillry](https://skillry.dev/ai-videos/opus-5-5). Their individual licenses and creators' media rights remain separate. [Full attribution →](ATTRIBUTION.md)
-
-This project extracts **observable design patterns** from public work; it does not copy another model's internal reasoning or claim an affiliation with Anthropic, OpenAI or Remotion.
+Unit tests use neutral technical fixtures, not a brand case study. FFmpeg-dependent tests skip if unavailable. **Passing automated tests does not prove a finished film, a real Plugin invocation, or actual juror scores.** Product evidence still requires a producer to verify it; the audio beat grid and mobile readability pass require creative review. The code and original orchestration content use [MIT](LICENSE); external references and media have separate rights ([attribution](ATTRIBUTION.md)).

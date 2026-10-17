@@ -57,4 +57,4 @@ node <skill>/scripts/render.mjs --root <new-film-folder> --out <new-film-folder>
 
 ## Handoff / traceability
 
-Run `python3 scripts/hype_motion_bridge.py --status`. To review commands without executing upstream, use `--plan --storyboard examples/parkgo/storyboard.json`. To generate traceable production planning JSON, use `--handoff --storyboard examples/parkgo/storyboard.json --output /tmp/parkgo-handoff.json`. Fill in candidate IDs **after** actual routing; never fabricate match results. Use `templates/ADAPTATION.md` at final delivery.
+Run `python3 scripts/hype_motion_bridge.py --status`. To review commands without executing upstream, use `--plan --storyboard /path/to/your-film/storyboard.json`. To generate traceable production planning JSON, use `--handoff --storyboard /path/to/your-film/storyboard.json --output /tmp/your-film-handoff.json`. Fill in candidate IDs **after** actual routing; never fabricate match results. Use `templates/ADAPTATION.md` at final delivery.

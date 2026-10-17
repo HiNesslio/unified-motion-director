@@ -18,7 +18,7 @@ class RemotionBridgeTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        self.storyboard = ROOT / 'examples' / 'parkgo' / 'storyboard.json'
+        self.storyboard = ROOT / 'tests' / 'fixtures' / 'storyboard.json'
         self.out = self.root / 'handoff'
         self.handoff = bridge.prepare(self.storyboard, self.out)
 
