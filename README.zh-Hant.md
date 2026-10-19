@@ -6,6 +6,17 @@
 
 [English](README.md) · [Skill 指示](SKILL.md) · [更新紀錄](CHANGELOG.md) · [來源授權](ATTRIBUTION.md)
 
+## v1.8：鏡頭連續性 × 聲畫編排
+
+新增對 **OneTake** 高連續性鏡頭、運鏡預判與停頓，以及 **huashu-motion** 先定音樂節奏、再讓主要視覺動作落點對應聲音嘅原則性研究。只加入 **獨立編寫** 嘅規範、Storyboard 欄位同規劃檢查工具，**不包含任何上游程式碼、音樂樣本、動畫引擎或素材**。OneTake 上游為 PolyForm Noncommercial，UMD 繼續為 MIT。
+
+```bash
+python3 scripts/validate_storyboard.py path/to/storyboard.json
+python3 scripts/motion_spine.py path/to/storyboard.json --out motion-spine.json
+```
+
+以上只作 **規劃階段** 連續性及聲畫時間差檢查，並非完成影片嘅實際同步或審美評分。Remotion Plugin、產品主張驗證及雙獨立評審保持不變。
+
 ## v1.7 有咩提升
 
 - **產品敘事理解**：由功能因果關係推導畫面，而唔係盲目加入特效。

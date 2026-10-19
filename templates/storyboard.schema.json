@@ -65,6 +65,78 @@
             "illustrative",
             "none"
           ]
+        },
+        "motion_sync_cues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "scene_id",
+              "event_action",
+              "picture_time_sec",
+              "priority",
+              "alignment",
+              "source_status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "scene_id": {
+                "type": "string",
+                "pattern": "^S[0-9]+$"
+              },
+              "event_action": {
+                "type": "string",
+                "minLength": 1
+              },
+              "picture_time_sec": {
+                "type": "number",
+                "minimum": 0
+              },
+              "audio_anchor_sec": {
+                "type": "number",
+                "minimum": 0
+              },
+              "intentional_offset_sec": {
+                "type": "number",
+                "minimum": -10,
+                "maximum": 10
+              },
+              "priority": {
+                "enum": [
+                  "hero",
+                  "primary",
+                  "secondary"
+                ]
+              },
+              "alignment": {
+                "enum": [
+                  "hit",
+                  "anticipate",
+                  "follow",
+                  "free"
+                ]
+              },
+              "source_status": {
+                "enum": [
+                  "illustrative",
+                  "candidate_unverified",
+                  "measured"
+                ]
+              },
+              "sfx_ref": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "measurement_evidence": {
+          "type": "string",
+          "minLength": 4
         }
       },
       "additionalProperties": true
@@ -419,6 +491,39 @@
                 "layout_ref": {
                   "type": "string"
                 }
+              }
+            }
+          },
+          "continuity_plan": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode",
+              "reason"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "carry",
+                  "anchor",
+                  "motivated_cut",
+                  "montage_hit",
+                  "endcard"
+                ]
+              },
+              "carrier_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "handoff_target": {
+                "type": "string"
+              },
+              "camera_behavior": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 6
               }
             }
           }

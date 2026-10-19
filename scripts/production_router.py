@@ -38,7 +38,8 @@ def build(film, engine):
     timeline={'schema':'umd.shared-timeline.v1', 'film_id':film.get('film_id','untitled'),
               'fps':fps,'duration_sec':duration,'timing_status':film.get('audio',{}).get('timing_status','unknown'),
               'source':'storyboard.json', 'visual_preset':film.get('visual_preset'),
-              'beat_grid':film.get('beat_grid'), 'claims_manifest':film.get('claims_manifest'), 'scenes':{}}
+              'beat_grid':film.get('beat_grid'), 'claims_manifest':film.get('claims_manifest'),
+              'motion_sync_cues':film.get('audio',{}).get('motion_sync_cues',[]), 'scenes':{}}
     for scene in scenes:
         begin=float(scene['start_sec']); end=float(scene['end_sec'])
         if abs(begin-prev)>1e-5 or end<=begin:
@@ -58,6 +59,7 @@ def build(film, engine):
             'typography_cues':scene.get('typography_cues',[]),
             'motion_pattern':scene.get('motion_pattern'),
             'claim_refs':scene.get('claim_refs',[]),
+            'continuity_plan':scene.get('continuity_plan'),
         }
         prev=end
     if abs(prev-duration)>1e-5:
@@ -72,7 +74,7 @@ def build(film, engine):
     plan={'film_id':timeline['film_id'],'engine':chosen,'reason':reason,'source_repo_id':selected['source'],
           'entry_contract':selected['entry'],'qa_stages':selected['qa'],
           'does_not_automatically': ['download upstream source','install dependencies','produce code or MP4','verify actual audio beats','grant media rights','assign subjective jury scores'],
-          'handoff_requirements':['audit third-party checkout/license','map shared-timeline.json into engine-native code','verify brand assets and actual claims','build and play draft','inspect frame sheets and post-render preflight','dispatch two isolated juror agents only on frozen MP4']}
+          'handoff_requirements':['audit third-party checkout/license','map shared-timeline.json into engine-native code','respect motion_sync_cues and continuity_plan without re-timing','verify brand assets and actual claims','build and play draft','inspect frame sheets and post-render preflight','dispatch two isolated juror agents only on frozen MP4']}
     return timeline, plan
 
 

@@ -62,3 +62,9 @@ User: "Build a 15-s no-voice app film"
 - Upstream code render contract is seek deterministic (`scene.js` exports width/height/duration/render(ctx,t); page entry alternative). Use its native exporter and environment after audit. Full clip must be decoded and visually reviewed. `ADAPTATION.md` must record actual function/file/asset reuse, rewritten shots, source commit and licenses.
 - Prefer **one coherent renderer/art direction per film or scene**. Crossing incompatible independent renderers requires an explicit compositing and color-management plan; otherwise use Hype as the sole illustrative engine, with this Skill remaining director/editor.
 - See [`source-assisted-production.md`](source-assisted-production.md) for escalation and acceptance criteria.
+
+## F. v1.8 studied craft references — NO backend installs or imported code
+
+- **OneTake** — https://github.com/feitangyuan/onetake — upstream **PolyForm Noncommercial 1.0.0**. Study visible continuity, camera operator, rhythm/carry editorial principles; **do not copy its library, source, templates or examples into this MIT repository**. It is not registered as a required renderer or installable backend.
+- **huashu-motion** — https://github.com/alchaincyf/huashu-motion — project code/docs MIT with separately licensed third-party material. Study the film-first musical score / cue spotting and action-to-audio handoff ideas; no `om` composer or runtime is bundled.
+- Original project-level implementation: `references/cinematic-continuity.md`, `references/music-picture-choreography.md`, `scripts/motion_spine.py`. Standard Remotion-first execution remains unchanged.

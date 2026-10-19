@@ -6,6 +6,17 @@
 
 [繁體中文](README.zh-Hant.md) · [Codex Skill](SKILL.md) · [Changelog](CHANGELOG.md) · [Source attribution](ATTRIBUTION.md)
 
+## v1.8 — continuity and music choreography
+
+Director Intelligence now includes **subject-carry continuity**, deliberate camera anticipation/settle, motivated cuts, and **score-aware picture landmarks**. Read [Cinematic continuity](references/cinematic-continuity.md) and [Music-to-picture choreography](references/music-picture-choreography.md). These are **original MIT-licensed editorial contracts**, inspired by public writings from [OneTake](https://github.com/feitangyuan/onetake) and [huashu-motion](https://github.com/alchaincyf/huashu-motion). No third-party engine, samples or code are bundled. OneTake is separately PolyForm Noncommercial; the UMD Skill remains MIT.
+
+```bash
+python3 scripts/validate_storyboard.py path/to/storyboard.json
+python3 scripts/motion_spine.py path/to/storyboard.json --out motion-spine.json
+```
+
+This produces **planning-only** scene continuity and picture/audio-cue diagnostics, *not* proof of finished visual quality or confirmed musical beat sync. Remotion and the existing independent acceptance workflow remain unchanged.
+
 ## What it does
 
 - **Product Story Intelligence**: turn product mechanics into a causal sequence of visible events instead of decorating unrelated features.

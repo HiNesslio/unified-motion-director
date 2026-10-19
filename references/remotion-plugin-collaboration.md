@@ -61,3 +61,7 @@ Only then: `python3 scripts/motion_preflight.py ...`; inspect suspicious frames,
 ### Boundaries
 
 Do not use the Plugin as a subjective reviewer of its own work. Do not let it arbitrarily alter the director-approved storyline, duration or verified copy to accommodate a technical shortcut. Changes requiring concept approval go back to the director; implementation bug fixes stay with Remotion. Never assert automatic model-to-model collaboration across isolated ChatGPT conversations. No warranties of specific output quality before real rendered frame review.
+
+## v1.8 scene-to-scene and music handoff
+
+Read optional `shared-timeline.json.scenes[*].continuity_plan` and top-level `motion_sync_cues`. Implement camera/tracked-subject behaviour within Remotion using frame-derived positions; use one shared clock for picture and soundtrack. If musical cues are illustrative, do not present sample-driven beats as measured; if the source track changes, re-evaluate all intended anchors. `motion_spine.py` provides planning guidance only. Its existence does not mean either upstream Huashu or OneTake is installed or invoked.

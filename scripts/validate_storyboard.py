@@ -109,6 +109,15 @@ def validate(data, base_dir=None):
             if not isinstance(event.get('action'),str) or not event['action'].strip(): errors.append(f"{ctx}.events[{j}]: action required")
             if not isinstance(event.get('claim_refs',[]),list) or any(x not in claim_refs for x in event.get('claim_refs',[])):
                 errors.append(f"{ctx}.events[{j}]: event claims must be declared by the owning scene")
+        # v1.8 continuity intent: optional, explicit only when author opts in.
+        continuity = s.get('continuity_plan')
+        if continuity is not None:
+            if not isinstance(continuity, dict) or continuity.get('mode') not in ('carry','anchor','motivated_cut','montage_hit','endcard'):
+                errors.append(f"{ctx}.continuity_plan: invalid mode")
+            elif continuity['mode'] in ('carry','anchor') and not continuity.get('carrier_id'):
+                errors.append(f"{ctx}.continuity_plan: carry/anchor requires carrier_id")
+            if not isinstance(continuity, dict) or not isinstance(continuity.get('reason'), str) or len(continuity['reason'].strip()) < 6:
+                errors.append(f"{ctx}.continuity_plan: describe the visual meaning of the seam")
         for j,cue in enumerate(s.get('typography_cues', [])):
             if not isinstance(cue,dict):errors.append(f"{ctx}.typography_cues[{j}]: expected object");continue
             times=[cue.get(k) for k in ('enter_sec','settle_sec','exit_sec')]
@@ -140,6 +149,44 @@ def validate(data, base_dir=None):
         errors.append(f"Story ends at {last_end:.3f}s but film duration is {duration:.3f}s")
     if data.get("audio", {}).get("timing_status") == "measured" and not data.get("audio", {}).get("music"):
         errors.append("Measured music timing needs a music source in audio.music")
+    # v1.8 picture/audio anchors: a timeline contract, never proof of audible sync.
+    soundtrack = data.get('audio') or {}
+    scene_by_id = {s['id']:s for s in scenes if isinstance(s,dict) and isinstance(s.get('id'),str)}
+    seen_cues = set()
+    for i,cue in enumerate(soundtrack.get('motion_sync_cues', [])):
+        label=f'audio.motion_sync_cues[{i}]'
+        if not isinstance(cue,dict): errors.append(f'{label}: expected object');continue
+        cid=cue.get('id')
+        if not isinstance(cid,str) or not cid.strip() or cid in seen_cues:
+            errors.append(f'{label}: cue id must be unique/nonempty')
+        seen_cues.add(cid)
+        parent=scene_by_id.get(cue.get('scene_id'))
+        if parent is None:
+            errors.append(f'{label}: unknown scene_id')
+            continue
+        target=cue.get('picture_time_sec')
+        events=[ev for ev in parent.get('events',[]) if isinstance(ev,dict) and ev.get('action')==cue.get('event_action')]
+        if len(events)!=1:
+            errors.append(f'{label}: event_action must identify exactly one event in scene')
+        if isinstance(target,bool) or not isinstance(target,(int,float)) or not math.isfinite(target) or not parent['start_sec']<=target<=parent['end_sec']:
+            errors.append(f'{label}: picture_time_sec outside scene')
+        elif len(events)==1 and isinstance(events[0].get('time_sec'),(int,float)) and abs(target-events[0]['time_sec'])>0.5/fps+1e-8:
+            errors.append(f'{label}: picture_time_sec must match identified event to half a frame')
+        anchor=cue.get('audio_anchor_sec')
+        if anchor is not None and (isinstance(anchor,bool) or not isinstance(anchor,(int,float)) or not math.isfinite(anchor) or not 0<=anchor<=duration):
+            errors.append(f'{label}: audio_anchor_sec invalid')
+        if anchor is None and cue.get('priority') in ('hero','primary') and cue.get('alignment') != 'free':
+            errors.append(f'{label}: sync to music needs audio_anchor_sec (or alignment free)')
+        offset=cue.get('intentional_offset_sec',0)
+        if isinstance(offset,bool) or not isinstance(offset,(int,float)) or not math.isfinite(offset) or abs(offset)>10:
+            errors.append(f'{label}: intentional_offset_sec invalid')
+        if cue.get('source_status')=='measured':
+            if soundtrack.get('timing_status')!='measured' or not soundtrack.get('music') or not soundtrack.get('measurement_evidence') or anchor is None:
+                errors.append(f'{label}: measured sync requires soundtrack, audio anchor and measurement_evidence')
+            else:
+                warnings.append(f'{label}: measured is a producer claim; listening/render QA not performed here')
+        elif cue.get('source_status') in ('illustrative','candidate_unverified'):
+            warnings.append(f'{label}: timing is not verified against real audio')
     bg=data.get('beat_grid')
     if bg is not None and (not isinstance(bg,dict) or bg.get('status') not in ('candidate_unverified','human_verified','illustrative')):
         errors.append('beat_grid status invalid')

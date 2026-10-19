@@ -60,6 +60,8 @@ Use the smallest viable subset. A one-button microinteraction needs an intention
 - Narrative / creative concept / copy: [`references/narrative-and-direction.md`](references/narrative-and-direction.md).
 - Shot list / image storyboard / camera: [`references/storyboard-language.md`](references/storyboard-language.md).
 - Timing / transitions / physical motion: [`references/motion-choreography.md`](references/motion-choreography.md).
+- **Cinematic continuity, long-take camera operator and justified cut strategy**: [`references/cinematic-continuity.md`](references/cinematic-continuity.md).
+- **Sound-to-picture score-first choreography and audio-to-visual landings**: [`references/music-picture-choreography.md`](references/music-picture-choreography.md).
 - Music / no-voice film: [`references/sound-and-rhythm.md`](references/sound-and-rhythm.md).
 - Build/render pipeline and engine decisions: [`references/technical-production.md`](references/technical-production.md).
 - For deterministic `seek(t)` + Playwright + filmic subframe render: [`references/howseen-seek-production.md`](references/howseen-seek-production.md).
@@ -68,6 +70,15 @@ Use the smallest viable subset. A one-button microinteraction needs an intention
 - Critique, acceptance and QA: [`references/quality-gates.md`](references/quality-gates.md) and **always after actual render** [`references/independent-acceptance.md`](references/independent-acceptance.md).
 - Source-driven visual assets / geometry / source reuse: [`references/source-assisted-production.md`](references/source-assisted-production.md).
 - Source licenses and derivation limits: [`ATTRIBUTION.md`](ATTRIBUTION.md).
+
+## v1.8: Continuity × Music-to-Picture Intelligence (independently authored, MIT)
+
+**Learn the craft, do not copy the engines.** Cinematic continuity/camera direction principles were studied from OneTake (PolyForm Noncommercial upstream), and score-first visual/sound choreography from huashu-motion (MIT upstream). UMD only adds independently authored Markdown contracts and Python planning checks. **No OneTake code, templates, look library, media or backend dependency is included**, and users do not need either upstream installed. The entire UMD repository remains MIT.
+
+1. On the storyboard, choose a clear visual spine: `carry`, `anchor`, `motivated_cut`, `montage_hit` or `endcard`. On selected outgoing scenes record optional `continuity_plan` with a meaningful explanation, persistent subject ID (when applicable), destination visual anchor and camera arrival/settle. **Do not make every transition a morph**; hard cuts and genuine one-takes are legitimate.
+2. For soundtrack-led work, read actual licensed audio and use `analyze_music.py` only for candidates; for film-led work, define picture landmarks before scoring. Put optional `audio.motion_sync_cues` in the storyboard, bound to actual scene `events`. Major visual landings carry explicit `picture_time_sec`, `audio_anchor_sec` and any intentional offset. Secondary detail is free to move between beats. Silence remains valid when requested.
+3. `python3 <SKILL_DIR>/scripts/validate_storyboard.py storyboard.json` enforces explicit v1.8 fields only **when provided**, preserving older storyboard compatibility. Then `python3 <SKILL_DIR>/scripts/motion_spine.py storyboard.json --out motion-spine.json` creates a **PLANNING_ONLY** seam/cue audit. Planning timestamps, metadata and inferred cadence **do not verify** actual camera tracking, musical synchronization or visual appeal.
+4. Preserve these fields in `shared-timeline.json` handed to Remotion/HTML production. Check draft seam strips and audible music/visual landings at normal speed; independent jurors still assess the hash-frozen rendered film, and the 55/45 acceptance gate is unchanged.
 
 ## Remotion Plugin first — coordinated production (v1.6)
 

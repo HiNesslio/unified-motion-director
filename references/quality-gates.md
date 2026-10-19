@@ -39,3 +39,7 @@ Run `python3 scripts/validate_storyboard.py storyboard.json`; separately perform
 ## Review report
 
 Document `observed evidence`, `severity`, `timecode/scene`, `revision`, `verified after fix`, and `unknown/unrun checks`. Include at least one reason for the creative decisions that remained unchanged.
+
+## v1.8 continuity and score diagnostics
+
+`python3 scripts/motion_spine.py storyboard.json --out motion-spine.json` reports missing seam explanations, shot-duration variation and planned picture/music cue offsets. **Every output is PLANNING_ONLY and every render observation NOT_EVALUATED.** Open actual decoded boundary frame strips and watch the rendered film with sound before drawing conclusions. OneTake-derived continuity ideas and huashu-derived score design do not replace the two isolated Jurors, Product Truth Gate or SHA-256-bound media acceptance.

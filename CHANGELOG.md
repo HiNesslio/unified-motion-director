@@ -1,3 +1,13 @@
+## v1.8 — Cinematic Continuity & Music-Picture Direction (2026-10-19)
+
+- Studied OneTake high-continuity film grammar and Huashu score-first sound/visual choreography without incorporating either project's runtime or assets. UMD remains MIT; OneTake stays separately PolyForm Noncommercial.
+- Added concise original editorial references for seamless subject carry, operator-style camera arrival and intentionally motivated cuts, and for meaningful audio/visual anchors.
+- Added optional `continuity_plan` per scene and `audio.motion_sync_cues` bound to named storyboard events, validated without invalidating v1.7 storyboards.
+- Added stdlib-only `scripts/motion_spine.py` to report seam documentation, cadence and **planned** picture/music offsets, strictly marked PLANNING_ONLY.
+- Propagated new fields into engine-neutral `shared-timeline.json` and therefore Remotion handoff.
+- Added regression tests covering compatibility, invalid cues, documentation, sound status and MIT-only provenance.
+- Original independent dual-juror SHA-bound review, Product Truth Gate and 55%/45% weighting remain unchanged.
+
 ## v1.7 — Product Storytelling & Precision Motion (2026-10-17)
 
 - Product Story Intelligence (causal product-to-motion story decisions), editable visual direction presets, and eight semantic motion patterns.

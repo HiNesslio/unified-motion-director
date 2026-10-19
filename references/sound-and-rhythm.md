@@ -30,3 +30,7 @@ Check length, clipping, silence, license ledger, cue/frame sync and any LUFS req
 3. Use named `beat_ref` only for hero payoff, key numbers and major title entrances. Secondary information enters when readable, not necessarily on the beat.
 4. Keep source audio file/version and visual scene-event clocks consistent. Retiming must regenerate cue and sound timeline; music analysis is not music generation.
 5. Render actual audio and inspect transition sync; audio waveform alone cannot prove perceived mix quality or music licenses.
+
+## v1.8: soundtrack and picture jointly authored
+
+See [`music-picture-choreography.md`](music-picture-choreography.md) for licensed-track-first versus picture-first score workflows. Name a few meaningful film landmarks, relate key `events` to `audio.motion_sync_cues`, and use `scripts/motion_spine.py` for planning-only diagnostics. A musical anchor is not verified by declaring its timestamp. Listen to the actual final encode, inspect perceived attack and movement landing, and leave secondary text unquantized when more tasteful. No forced music for explicitly silent work.

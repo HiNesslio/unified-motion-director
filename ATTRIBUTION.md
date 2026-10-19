@@ -26,3 +26,10 @@ MIT License. Copyright (c) 2026 Unified Motion Director contributors. See `LICEN
 - **whaleyxbt**, `claude-motion`: https://github.com/whaleyxbt/claude-motion — MIT code, copyright (c) 2026 whaleyxbt. Remotion scene timing, deterministic simulation, beat-based contact sheets, procedural sound and taste defaults informed `references/whaley-motion-toolkit.md`. Upstream source is not embedded. Remotion licensing must be checked for the user's organization and use.
 
 The code in this ZIP is newly written integration and test scaffolding; it does **not** contain vendor runtime copies or downloaded media. Reference behaviour described after reading public documentation/code, not after executing upstream examples.
+
+## Studied in v1.8 — principles only, without relicensing upstream code
+
+- **OneTake / Patrick**, https://github.com/feitangyuan/onetake — **PolyForm Noncommercial 1.0.0**. Its public documentation on visual carry, intentional rests, camera follow/anticipation and reference/rhythm deconstruction informed *independently authored editorial guidance only*. No upstream source code, algorithmic thresholds, movie clips, compositions or assets are redistributed. The original licence remains applicable to any separately obtained OneTake copy.
+- **huashu-motion / Huashu**, https://github.com/alchaincyf/huashu-motion — project core MIT; bundled vendors, fonts and audio samples have their own licensing terms. Its documented approach to score-first music, visual hits, rests and named picture-to-audio cue alignment informed independent v1.8 workflow guidance. UMD does **not** copy its music engine, score sources, sample library or CLI.
+
+**This UMD repository remains MIT**, including the new original v1.8 writing, schemas, validation and scripts. Public inspiration, code inclusion and upstream installation are deliberately different operations.
