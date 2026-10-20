@@ -63,6 +63,15 @@ User: "Build a 15-s no-voice app film"
 - Prefer **one coherent renderer/art direction per film or scene**. Crossing incompatible independent renderers requires an explicit compositing and color-management plan; otherwise use Hype as the sole illustrative engine, with this Skill remaining director/editor.
 - See [`source-assisted-production.md`](source-assisted-production.md) for escalation and acceptance criteria.
 
+## G. Mografy — optional standalone native Canvas-2D renderer (not a bundled component pack)
+
+- https://github.com/zz41354899/mografy · upstream source MIT; CJK font subsets OFL. Engine installation is independent and needs approval.
+- The project-local `mografy.json` and `scenes/main.ts` belong to the Mografy runtime. Consult the currently installed upstream `.agents/skills/mografy/SKILL.md` and `references/scene-authoring.md` before scene edits; never import runtime TypeScript into the orchestration Skill.
+- Appropriate for 2D motion graphics, measured typography and 9:16 Canvas compositions. Keep React-heavy product UI on Remotion unless directed otherwise.
+- UMD stays the director and owner of storyboard, licenses, beats, truth, and acceptance. Plan-only handoff `scripts/mografy_bridge.py prepare`; verify only encoded-media identity with its `verify` step.
+- For production run the upstream `mografy check`, `review` and `export` commands against the Mografy scene project. Review actual PNGs, not just CLI success; then run UMD independent jurors.
+- See [`mografy-canvas-production.md`](mografy-canvas-production.md).
+
 ## F. v1.8 studied craft references — NO backend installs or imported code
 
 - **OneTake** — https://github.com/feitangyuan/onetake — upstream **PolyForm Noncommercial 1.0.0**. Study visible continuity, camera operator, rhythm/carry editorial principles; **do not copy its library, source, templates or examples into this MIT repository**. It is not registered as a required renderer or installable backend.

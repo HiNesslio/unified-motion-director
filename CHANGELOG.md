@@ -1,3 +1,13 @@
+## v1.9 — Mografy native Canvas production lane (2026-10-20)
+
+- Added an optional, separately installed [Mografy](https://github.com/zz41354899/mografy) local Canvas 2D backend for graphics/kinetic type/CJK, with unchanged Remotion-first policy for React/UI-heavy work.
+- Added `mografy` engine routing and optional `engine_preference` storyboard schema with backward-compatible defaults.
+- Added `scripts/mografy_bridge.py`: validate storyboard and Product Truth references, freeze original SHA, export shared timeline/review sampling/production contract; independently verify actual encoded MP4/WebM metadata and SHA without self-approving.
+- Documented Mografy's upstream scene contract, Node.js requirement, 16 component references, optional CJK/cinema extras, and `check → review → export` workflow.
+- No upstream source, bundled fonts, assets, third-party binaries, demos or renderer licenses were imported. Mografy source MIT; CJK fonts OFL and other media separately licensed.
+- The existing director workflow, Product Truth hard gate, Remotion collaboration, score/music planning and isolated dual-juror 55/45 acceptance are unchanged.
+- New regression tests use neutral fixtures or synthetic FFmpeg media, **not** actual Mografy visual/audio acceptance.
+
 ## v1.8 — Cinematic Continuity & Music-Picture Direction (2026-10-19)
 
 - Studied OneTake high-continuity film grammar and Huashu score-first sound/visual choreography without incorporating either project's runtime or assets. UMD remains MIT; OneTake stays separately PolyForm Noncommercial.

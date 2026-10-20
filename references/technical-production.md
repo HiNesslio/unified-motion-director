@@ -11,6 +11,7 @@
 - **Deterministic editorial HTML film with controlled motion blur** → howseen-ai `claude-motion-design`: seek(t), Chromium capture, verified beat/drop and selective in-shot shutter integration.
 - **React/UI and timeline-synchronized original procedural SFX** → whaleyxbt `claude-motion`: Remotion, named timeline anchors, Python sound cue sheet.
 - **Many agents or simulated physics with 3D camera** → whaleyxbt `sims/` frame-stepped web capture; separate from Remotion route.
+- **Deterministic native Canvas 2D with an inspectable local player, 16 reference components, optional vertical CJK and FFmpeg exports** → installed [Mografy](https://github.com/zz41354899/mografy) via `mografy_bridge.py`; do not copy upstream runtime or assume installed.
 - **Text-to-video models** → prompts for cinematic plates only when allowed; composite exact text and actual UI in post where possible.
 
 ## Canonical file contract

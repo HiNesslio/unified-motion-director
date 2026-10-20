@@ -565,6 +565,14 @@
           "pattern": "^[a-f0-9]{64}$"
         }
       }
+    },
+    "engine_preference": {
+      "enum": [
+        "html-seek",
+        "remotion",
+        "web-sim",
+        "mografy"
+      ]
     }
   }
 }

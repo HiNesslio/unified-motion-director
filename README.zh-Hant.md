@@ -6,6 +6,25 @@
 
 [English](README.md) · [Skill 指示](SKILL.md) · [更新紀錄](CHANGELOG.md) · [來源授權](ATTRIBUTION.md)
 
+## v1.9：Mografy 本地 Canvas 動畫路線
+
+新增 [Mografy](https://github.com/zz41354899/mografy) 作為**可選、獨立安裝**嘅 Canvas 2D 製作後端，適合文字、數字、圖形動態效果同繁體中文／日文排版。**Remotion Plugin 繼續優先處理 React 產品 UI 影片**，原有 Product Truth Gate、影片 SHA-256 綁定同雙獨立 Agent 驗收唔變。
+
+```bash
+python3 scripts/production_router.py film/storyboard.json --engine mografy --out film/route
+python3 scripts/mografy_bridge.py prepare film/storyboard.json --out film/mografy-handoff
+
+# 另外喺已安裝、經授權嘅 Mografy 專案執行：
+mografy check projects/<film>
+mografy review projects/<film>
+mografy export projects/<film> --format mp4
+
+# 使用實際產生嘅影片：
+python3 scripts/mografy_bridge.py verify --handoff film/mografy-handoff/mografy-handoff.json --video projects/<film>/renders/final.mp4 --out film/verified-media.json
+```
+
+交接工具只生成計劃、時間線同檔案校驗碼，**唔會自行安裝 Mografy 或輸出影片**。`verify` 只確認編碼影片嘅時間、幀率、畫面比例同 SHA，唔代表真實審美評分或已核實 Mografy 出片來源。詳見 [Mografy 整合指引](references/mografy-canvas-production.md)。
+
 ## v1.8：鏡頭連續性 × 聲畫編排
 
 新增對 **OneTake** 高連續性鏡頭、運鏡預判與停頓，以及 **huashu-motion** 先定音樂節奏、再讓主要視覺動作落點對應聲音嘅原則性研究。只加入 **獨立編寫** 嘅規範、Storyboard 欄位同規劃檢查工具，**不包含任何上游程式碼、音樂樣本、動畫引擎或素材**。OneTake 上游為 PolyForm Noncommercial，UMD 繼續為 MIT。

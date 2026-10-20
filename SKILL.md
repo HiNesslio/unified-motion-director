@@ -23,6 +23,14 @@ Do not force an Apple aesthetic or a fixed background. Choose one dominant visua
 
 If final media and renderer-measured text bounds exist, use `motion_preflight.py --layout-manifest ...` to surface phone-width glyph size, margin and settled-hold candidates. `NOT_EVALUATED` without evidence; geometry does not certify legibility. Always preserve two isolated aesthetic/holistic jurors, 55/45 weighting and SHA-pinned acceptance. Product Truth is a separate release hard gate.
 
+## v1.9 — Mografy native Canvas collaboration (optional)
+
+Mografy (https://github.com/zz41354899/mografy) is an **optional, separate local Canvas-2D film backend** for kinetic typography, icons, 2D graphics, local scrub preview, and language-sensitive CJK compositions. It complements rather than replaces the Remotion Plugin. When `mografy` is genuinely installed and chosen, ALWAYS read [references/mografy-canvas-production.md](references/mografy-canvas-production.md) and the installed upstream Mografy Skill/scene-authoring contracts. Do not infer tool availability from this reference or execute an install without consent.
+
+Use `python3 <SKILL_DIR>/scripts/production_router.py storyboard.json --engine mografy --out handoff/route` and `python3 <SKILL_DIR>/scripts/mografy_bridge.py prepare storyboard.json --out handoff/mografy` to freeze storyboard SHA, prepare shared named timeline, review timestamp suggestions and a task for the Mografy runtime. **This does not create executable Mografy scene code or run Mografy.** In its own installed workspace the scene author implements pure `renderFrame(ctx,time,params)`, then runs `mografy check`, `mografy review` and `mografy export`. The optional verifier only checks encoded-media identity, not actual source provenance or creative quality.
+
+Remotion remains default for React/app UI storytelling; Mografy is better when a genuinely native Canvas 2D scene is desired or user explicitly selects it. After any real render, run unchanged Product Truth Gate, encoded technical preflight and **both isolated Codex jurors**. Never reclassify upstream component demo renders as actual product evidence.
+
 ## Mandatory operating principles
 
 1. **Truth before spectacle.** Use verified product claims, original screenshots, approved logos, footage and copy; do not invent features, performance numbers, testimonials or interface elements. Distinguish concept frames from real UI. Licenses for imagery, music, typefaces and sound must be recorded.
@@ -66,6 +74,7 @@ Use the smallest viable subset. A one-button microinteraction needs an intention
 - Build/render pipeline and engine decisions: [`references/technical-production.md`](references/technical-production.md).
 - For deterministic `seek(t)` + Playwright + filmic subframe render: [`references/howseen-seek-production.md`](references/howseen-seek-production.md).
 - **When using the official ChatGPT/Codex Remotion Plugin, ALWAYS** read [`references/remotion-plugin-collaboration.md`](references/remotion-plugin-collaboration.md), then relevant official Remotion Skills. Do not assume Plugin availability merely from this Skill being installed.
+- Native Canvas 2D, CJK vertical text and Mografy project production: [`references/mografy-canvas-production.md`](references/mografy-canvas-production.md) and the installed Mografy `SKILL.md` (optional).
 - For Remotion scene timing, procedural SFX, web simulation and beat-sampled self-review: [`references/whaley-motion-toolkit.md`](references/whaley-motion-toolkit.md).
 - Critique, acceptance and QA: [`references/quality-gates.md`](references/quality-gates.md) and **always after actual render** [`references/independent-acceptance.md`](references/independent-acceptance.md).
 - Source-driven visual assets / geometry / source reuse: [`references/source-assisted-production.md`](references/source-assisted-production.md).
@@ -101,6 +110,7 @@ Never assume two independent ChatGPT chats share files or can call each other's 
 - **Claude Motion Skill** (Hype-yolo): optional *source-assisted construction* backend for illustration-rich films. Locate actual working shape, material, shading, skeletal/IK motion, scene and object source; carry provenance into a changed story, frame-test the key effect, then render and inspect. Its case catalogue contains 47 source cases and its overlapping component/asset collections are NOT extra independent styles. See `references/source-assisted-production.md`.
 - **Howseen claude-motion-design** (howseen-ai): optional deterministic HTML/Playwright/FFmpeg engine with measured audio drop, camera/morph grammar, subframe blur, pop scan and loop seam checks. Upstream MIT for code; source media licenses separate. Its `seek(t)` seconds or `seek(F)` frame engine is a backend, not a licence to frame-copy another film. See `references/howseen-seek-production.md`.
 - **Official Remotion ChatGPT/Codex Plugin**: optional first-class production companion for Remotion work, verified public listing https://chatgpt.com/plugins/remotion and guide https://www.remotion.dev/docs/ai/codex-plugin ; installed independently. UMD makes the creative decisions and handles the final QA gate, while official Remotion Skills own implementation. No Plugin source or runtime is bundled.
+- **Mografy / zz41354899**: optional, separately installed deterministic Canvas 2D rendering/player backend; read [`references/mografy-canvas-production.md`](references/mografy-canvas-production.md). Upstream MIT; CJK fonts OFL. No runtime, scenes, images, music or fonts bundled; Mografy `check`/`review` are not substitutes for UMD's independent jurors.
 - **whaleyxbt claude-motion**: optional Remotion component/audio engine **or** deterministic three.js web-sim capture. Its timing/sound source-of-truth and beat-sheet QA improve any backend. Upstream MIT code; check Remotion license independently. See `references/whaley-motion-toolkit.md`.
 - All external projects are **optional**. Missing tools means deliver an honest storyboard/spec/code draft or choose a locally available method, not fake MP4 output.
 

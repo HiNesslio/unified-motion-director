@@ -33,3 +33,7 @@ The code in this ZIP is newly written integration and test scaffolding; it does 
 - **huashu-motion / Huashu**, https://github.com/alchaincyf/huashu-motion — project core MIT; bundled vendors, fonts and audio samples have their own licensing terms. Its documented approach to score-first music, visual hits, rests and named picture-to-audio cue alignment informed independent v1.8 workflow guidance. UMD does **not** copy its music engine, score sources, sample library or CLI.
 
 **This UMD repository remains MIT**, including the new original v1.8 writing, schemas, validation and scripts. Public inspiration, code inclusion and upstream installation are deliberately different operations.
+
+## Optional integration added in v1.9
+
+- **Mografy / zz41354899**, https://github.com/zz41354899/mografy — upstream animation tool and Skill, **MIT** (2026 Mografy contributors). Native Canvas scenes, absolute-time frame semantics, live Chromium trial playback, check/review/export pipeline, optional cinema/CJK extras and sample component catalog informed the independently authored adapter and reference documentation. **No Mografy runtime, TypeScript components, screenshots, demo music, fonts, bundled examples, or upstream code is redistributed here.** Optional Noto CJK subsets in Mografy are **OFL** and other external assets carry their own licenses. Users who independently install Mografy must honor its license and third-party assets' terms.

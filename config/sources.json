@@ -36,6 +36,12 @@
       "url": "https://github.com/whaleyxbt/claude-motion.git",
       "role": "optional-remotion-audio-and-web-sim-backend",
       "license": "MIT for repository code; Remotion has a separate license; external assets/fonts individually licensed"
+    },
+    {
+      "id": "mografy",
+      "url": "https://github.com/zz41354899/mografy.git",
+      "role": "optional-deterministic-native-canvas-2d-backend",
+      "license": "MIT for source; bundled CJK font assets are separately OFL-licensed; external audio/images/fonts retain their own licenses"
     }
   ]
 }

@@ -44,6 +44,9 @@ def validate(data, base_dir=None):
         for r in data["aspect_ratios"]:
             if not isinstance(r, str) or not re.fullmatch(r"[1-9][0-9]*:[1-9][0-9]*", r):
                 errors.append(f"Invalid aspect ratio: {r!r}")
+    pref = data.get("engine_preference")
+    if pref is not None and pref not in ("html-seek", "remotion", "web-sim", "mografy"):
+        errors.append("engine_preference must name a supported production engine")
     scenes = data.get("scenes")
     if not isinstance(scenes, list) or not scenes:
         errors.append("scenes must be a nonempty array")

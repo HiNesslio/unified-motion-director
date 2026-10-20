@@ -6,6 +6,27 @@
 
 [繁體中文](README.zh-Hant.md) · [Codex Skill](SKILL.md) · [Changelog](CHANGELOG.md) · [Source attribution](ATTRIBUTION.md)
 
+## v1.9 — Mografy Canvas production (optional)
+
+[Mografy](https://github.com/zz41354899/mografy) is now an additional **native Canvas 2D production lane** for motion typography, numeric/shape animations, localized CJK text and portrait motion graphics. **Remotion Plugin stays the default for React/UI-led films**; the core director, Product Truth hard gate, and two independently run Codex jurors are unchanged.
+
+```bash
+python3 scripts/production_router.py film/storyboard.json --engine mografy --out film/route
+python3 scripts/mografy_bridge.py prepare film/storyboard.json --out film/mografy-handoff
+
+# Separately, in an approved installed Mografy workspace:
+mografy check projects/<film>
+mografy review projects/<film>
+mografy export projects/<film> --format mp4
+
+# On a real final encoded output:
+python3 scripts/mografy_bridge.py verify \
+  --handoff film/mografy-handoff/mografy-handoff.json \
+  --video projects/<film>/renders/final.mp4 --out film/media-identity.json
+```
+
+The handoff writes a frozen storyboard SHA, engine-neutral named times, planning review samples and a Mografy production task. It **does not install Mografy or render a video**. `verify` examines actual encoded video properties and identity, **not** Mografy provenance, frame quality, audio sync or juror acceptance. Mografy currently requires Node.js 22.12+ and a separate local installation. See the [full Mografy integration and licensing guidance](references/mografy-canvas-production.md).
+
 ## v1.8 — continuity and music choreography
 
 Director Intelligence now includes **subject-carry continuity**, deliberate camera anticipation/settle, motivated cuts, and **score-aware picture landmarks**. Read [Cinematic continuity](references/cinematic-continuity.md) and [Music-to-picture choreography](references/music-picture-choreography.md). These are **original MIT-licensed editorial contracts**, inspired by public writings from [OneTake](https://github.com/feitangyuan/onetake) and [huashu-motion](https://github.com/alchaincyf/huashu-motion). No third-party engine, samples or code are bundled. OneTake is separately PolyForm Noncommercial; the UMD Skill remains MIT.

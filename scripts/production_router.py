@@ -11,16 +11,22 @@ from datetime import datetime, timezone
 
 
 def route(film, engine='auto'):
+    allowed = ('auto', 'html-seek', 'remotion', 'web-sim', 'mografy')
+    if engine not in allowed:
+        raise ValueError(f'Unknown production engine: {engine}')
     if engine != 'auto':
         return engine, 'Explicitly selected by producer; check technical fitness.'
+    if film.get('engine_preference') in allowed[1:]:
+        return film['engine_preference'], 'Storyboard explicitly selects an engine.'
     shots = film.get('scenes', [])
     text = ' '.join(str(s.get(k,'')) for s in shots for k in ('subject','purpose','action')).lower()
     sim_terms = ('simulation','particle','swarm','crowd of agents','fly-through','fluid physics',
                  'physics simulation','engine chamber','agents moving')
+    canvas_terms = ('mografy', 'native canvas', 'canvas 2d', '2d canvas', 'vertical cjk')
+    if any(x in text for x in canvas_terms):
+        return 'mografy', 'Native Canvas 2D motion, CJK typesetting or Mografy is explicitly mentioned.'
     if any(x in text for x in sim_terms):
         return 'web-sim', 'Storyboard suggests many independently moving agents or spatial simulation.'
-    if film.get('engine_preference') in ('html-seek','remotion','web-sim'):
-        return film['engine_preference'], 'Storyboard engine preference.'
     if 'ui' in text or 'screen' in text or 'app' in text or any(s.get('on_screen_text') for s in shots):
         return 'remotion', 'Editable React UI/typography makes scene-component composition a reasonable default.'
     return 'html-seek', 'Custom graphical choreography with a deterministic time-seeking browser is a reasonable default.'
@@ -68,7 +74,8 @@ def build(film, engine):
     profiles={
       'html-seek':{'source':'howseen-claude-motion-design','entry':'window.seek(t) in seconds','qa':['four key stills','fast draft','subframe master within shots','suspect pop strips','true final encode']},
       'remotion':{'source':'whaleyxbt-claude-motion','entry':'Remotion frame + shared named times','qa':['draft','named-beat contact sheets','sound cue sheet','full encode','audio waveform']},
-      'web-sim':{'source':'whaleyxbt-claude-motion','entry':'precompute simulation + pure window.SIM.render(t)','qa':['arbitrary-order seek probes','beat stills','3D camera clipping','frame stepped capture']}
+      'web-sim':{'source':'whaleyxbt-claude-motion','entry':'precompute simulation + pure window.SIM.render(t)','qa':['arbitrary-order seek probes','beat stills','3D camera clipping','frame stepped capture']},
+      'mografy':{'source':'mografy','entry':'Mografy renderFrame(ctx, absolute_time, params) native Canvas 2D','qa':['Chromium trial render via mografy check','mografy review sheets','random-order seek correctness','CJK/portrait layout','final encoded MP4/WebM','UMD post-render jury']}
     }
     selected=profiles[chosen]
     plan={'film_id':timeline['film_id'],'engine':chosen,'reason':reason,'source_repo_id':selected['source'],
@@ -81,7 +88,7 @@ def build(film, engine):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('storyboard',type=Path)
-    p.add_argument('--engine',choices=['auto','html-seek','remotion','web-sim'],default='auto')
+    p.add_argument('--engine',choices=['auto','html-seek','remotion','web-sim','mografy'],default='auto')
     p.add_argument('--out',required=True,type=Path)
     a=p.parse_args()
     film=json.loads(a.storyboard.read_text(encoding='utf-8'))
